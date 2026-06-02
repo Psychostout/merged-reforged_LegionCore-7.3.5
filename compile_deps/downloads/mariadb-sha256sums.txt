@@ -1,0 +1,2 @@
+156aed3b49f857d0ac74fb76f1982968bcbfd8382da3f5b6ae71f616729920d7  ./mariadb-connector-c-3.4.8-src.tar.gz
+1d774cff8150b243a1f620d46d5eec69a3eff6be6133bbe374d9c02625416bff  ./mariadb-connector-c-3.4.8-src.zip
