@@ -104,21 +104,21 @@ WorldDatabase.SynchThreads     = 1
 
 #
 #    MaxPingTime
-#        Interval (in minutes) between the pings of maintien of connection MySQL.
+#        Interval (en minutes) between the pings of maintien of connection MySQL.
 #        Default: 30
 
 MaxPingTime = 30
 
 #
 #    WorldServerPort
-#        Port TCP principal of server world.
+#        Port TCP principal of server monde.
 #        Default: 8085
 
 WorldServerPort = 8085
 
 #
 #    InstanceServerPort
-#        Port TCP for the second world connection (instances).
+#        Port TCP for la second connection monde (instances).
 #        Default: 8086
 
 InstanceServerPort = 8086
@@ -139,19 +139,19 @@ BnetServer.Port = 1118
 
 #
 #    BindIP
-#        Address IP of ecoute of server world.
+#        Address IP of ecoute of server monde.
 #        Default: "0.0.0.0" - (Ecoute on all the interfaces)
 
 BindIP = "0.0.0.0"
 
 #
 #    ThreadPool
-#        Number of threads for the global pool. Used for :
+#        Number of threads for le pool global. Used for :
 #        - Gestion the signaux
 #        - Acces distant (RA)
 #        - Ping keep-alive of the base of data
 #        - Detection of freeze of core
-#        - Network (sockets world)
+#        - Network (sockets monde)
 #        Default: 2
 
 ThreadPool = 2
@@ -159,7 +159,7 @@ ThreadPool = 2
 #
 #    SourceDirectory
 #        Path to the LegionCore source directory.
-#        If empty, the compiled CMAKE_SOURCE_DIR path is used.
+#        Si empty, le path CMAKE_SOURCE_DIR compile is used.
 #        Default: ""
 
 SourceDirectory = ""
@@ -168,7 +168,7 @@ SourceDirectory = ""
 #    MySQLExecutable
 #        Path to the mysql command-line executable.
 #        Used for the application automatique the updates a day SQL.
-#        If empty, the path compiled by cmake is used.
+#        Si empty, le path compile by cmake is used.
 #        Example: "C:/Program Files/MySQL/MySQL Server 8.4/bin/mysql.exe"
 #        Default:  ""
 
@@ -186,7 +186,7 @@ MySQLExecutable = ""
 #                 1  - (PVP)
 #                 6  - (RP)
 #                 8  - (RPPVP)
-#                 16 - (FFA_PVP, PvP libre anywhere sauf zones of repos and sanctuaires)
+#                 16 - (FFA_PVP, PvP libre partout sauf zones of repos and sanctuaires)
 
 GameType = 0
 
@@ -205,38 +205,38 @@ RealmZone = 1
 
 #
 #    StrictPlayerNames
-#        Restreint the names of players to the jeu of characters of the language of server.
-#        Prevent creation and force a rename if forbidden characters are used.
-#        Default: 0 - (Disabled, client-side check based on timezone)
-#                 1 - (Enabled, characters latins of base only)
-#                 2 - (Enabled, based on realm zone, see RealmZone)
+#        Restreint the names of players to the jeu of caracteres of the langue of server.
+#        Empeche la creation and force a renommage if the caracteres interdits are used.
+#        Default: 0 - (Disabled, check client selon le fuseau horaire)
+#                 1 - (Enabled, caracteres latins of base only)
+#                 2 - (Enabled, selon la zone of realm, see RealmZone)
 #                 3 - (Enabled, latins of base + zone of realm)
 
 StrictPlayerNames = 1
 
 #
 #    StrictCharterNames
-#        Restreint the names of charters of guild to the jeu of characters of the language.
+#        Restreint the names of charters of guild to the jeu of caracteres of the langue.
 #        Default: 0 - (Disabled)
 #                 1 - (Caracteres latins of base only)
-#                 2 - (Follows realm zone)
+#                 2 - (Selon la zone of realm)
 #                 3 - (Latins of base + zone of realm)
 
 StrictCharterNames = 1
 
 #
 #    StrictPetNames
-#        Restreint the names of pets to the jeu of characters of the language.
+#        Restreint the names of pets to the jeu of caracteres of the langue.
 #        Default: 0 - (Disabled)
 #                 1 - (Caracteres latins of base only)
-#                 2 - (Follows realm zone)
+#                 2 - (Selon la zone of realm)
 #                 3 - (Latins of base + zone of realm)
 
 StrictPetNames = 1
 
 #
 #    DBC.Locale
-#        Language of DBC/DB2 files used by the server.
+#        Langue the files DBC/DB2 used by le server.
 #        Default: 0 - (Anglais)
 #                 1 - (Coreen)
 #                 2 - (Francais)
@@ -259,7 +259,7 @@ DeclinedNames = 0
 
 #
 #    Expansion
-#        Maximum expansion supported by the server.
+#        Extension maximale supported by le server.
 #        Controle the maps, races and classes available.
 #        Default: 6 - (Legion)
 #                 5 - (Warlords of Draenor)
@@ -267,7 +267,7 @@ DeclinedNames = 0
 #                 3 - (Cataclysm)
 #                 2 - (Wrath of the Lich King)
 #                 1 - (Burning Crusade)
-#                 0 - (Classic, ignores all expansion content)
+#                 0 - (Classique, ignore tout le content the extensions)
 
 Expansion = 6
 
@@ -328,7 +328,7 @@ DemonHuntersPerRealm = 12
 
 #
 #    CharacterCreating.MinLevelForDemonHunter
-#        Minimum level of an existing character on the account to create
+#        Level minimum of a character existant on le account for create
 #        a Demon Hunter.
 #        Default: 70 - (Requires a character level 70)
 #                 0  - (None restriction)
@@ -337,10 +337,10 @@ CharacterCreating.MinLevelForDemonHunter = 0
 
 #
 #    SkipCinematics
-#        Disable the intro cinematic on first login.
+#        Disabled la cinematique of introduction a la premiere connection.
 #        Utile if the coordonnees of depart are personnalisees.
 #        Default: 0 - (Show the intro for chaque new character)
-#                 1 - (Show the intro only for le first character of this race)
+#                 1 - (Show the intro only for le premier character of this race)
 #                 2 - (Disabled the intro for all the classes)
 
 SkipCinematics = 0
@@ -371,7 +371,7 @@ StartHeroicPlayerLevel = 55
 
 #
 #    StartPlayerMoney
-#        Amount of money (in copper) a character starts with on creation.
+#        Montant of argent (en cuivre) qu'a character possede a la creation.
 #        Default: 0
 #                 100 - (1 piece of argent)
 
@@ -379,10 +379,10 @@ StartPlayerMoney = 0
 
 #
 #    InstantLogout
-#        Security level required for instant logout anywhere.
+#        Level of securite requis for la disconnection instantanee partout.
 #        Ne fonctionne pas en combat, en duel ou en chute.
 #        Default: 1 - (Moderateurs/GMs/Admins)
-#                 0 - (Everyone)
+#                 0 - (Tout le monde)
 #                 2 - (GMs/Admins)
 #                 3 - (Admins only)
 #                 4 - (Disabled, personne)
@@ -392,7 +392,7 @@ InstantLogout = 0
 #
 #    NoResetTalentsCost
 #        Reset the talents gratuit (without cout en or).
-#        Note: In Legion talents are free by default anyway.
+#        Note: En Legion the talents are gratuits by defaut of toute facon.
 #        Default: 0 - (Disabled, cout normal)
 #                 1 - (Enabled, gratuit)
 
@@ -401,23 +401,23 @@ NoResetTalentsCost = 1
 #
 #    PlayerDump.DisallowPaths
 #        Forbid the utilisation of chemins in the files of sortie PlayerDump.
-#        Securite : emfishing the ecriture in the directories arbitraires.
+#        Securite : empeche the ecriture in the directories arbitraires.
 #        Default: 1
 
 PlayerDump.DisallowPaths = 1
 
 #
 #    PlayerDump.DisallowOverwrite
-#        Forbid the ecrasement of files existings by PlayerDump.
+#        Forbid the ecrasement of files existants by PlayerDump.
 #        Default: 1
 
 PlayerDump.DisallowOverwrite = 1
 
 #
 #    DisableWaterBreath
-#        Security level required for breathing underwater.
+#        Level of securite requis for la respiration under the eau infinie.
 #        Default: 4 - (Disabled for all)
-#                 0 - (Enabled for everyone)
+#                 0 - (Enabled for tout le monde)
 #                 1 - (Moderateurs/GMs/Admins)
 #                 2 - (GMs/Admins)
 #                 3 - (Admins only)
@@ -426,7 +426,7 @@ DisableWaterBreath = 1
 
 #
 #    FastFishing
-#        Speed up fishing or remove the wait entirely.
+#        Accelere la peche ou removed the attente completement.
 #        Default: 0 - (Normal)
 #                 1 - (Plus rapide)
 #                 2 - (Instantane)
@@ -482,7 +482,7 @@ CharacterBoost.Enabled = 1
 #
 #    ClassTrial.Enabled
 #        Enabled le bouton Essai of Classe a the ecran of selection of character.
-#        Creates a character temporaire level 100 which sera locked
+#        Creates a character temporaire level 100 which sera verrouille
 #        after disconnection tant qu'a Boost notest pas achete.
 #        Default: 1 - (Enabled)
 #                 0 - (Disabled)
@@ -502,7 +502,7 @@ CharacterTemplate.Enabled = 0
 
 #
 #    WowToken.Enabled
-#        Enable the system WoW Token in the auction house.
+#        Enabled le systeme WoW Token in the hotel the ventes.
 #        Allow to the players of acheter/vendre the tokens and de
 #        the echanger contre of solde BattlePay.
 #        Default: 1 - (Enabled)
@@ -512,7 +512,7 @@ WowToken.Enabled = 0
 
 #
 #    WowToken.MarketPrice
-#        Price of WoW Token en pieces of or.
+#        Prix of WoW Token en pieces of or.
 #        Default: 60000
 
 WowToken.MarketPrice = 60000
@@ -552,7 +552,7 @@ Custom.GainHonorOnEliteKill = 1
 #
 #    Player.ControlGuardianPets
 #        The pets temporaires non-controles (ex: Dire Beast) attaqueront
-#        automatically la cible of player quand il change of cible.
+#        automatiquement la cible of player quand il change of cible.
 #        Default: 1 - (Enabled)
 #                 0 - (Disabled)
 
@@ -577,7 +577,7 @@ DisableRestart = 1
 
 #
 #    WorldQuest
-#        Enabled/Disabled the system of Quests Mondiales.
+#        Enabled/Disabled le systeme of Quests Mondiales.
 #        Default: 1 - (Enabled)
 #                 0 - (Disabled)
 
@@ -585,7 +585,7 @@ WorldQuest = 1
 
 #
 #    AllFlightPaths
-#        Le character connait all the points of flight (deux factions) the the creation.
+#        Le character connait all the points of flight (deux factions) the la creation.
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
 
@@ -602,7 +602,7 @@ InstantFlightPaths = 0
 #
 #    Instance.IgnoreLevel
 #        Ignore la condition of level for entrer in the instances.
-#        Default: 0 - (Disabled, level required)
+#        Default: 0 - (Disabled, level requis)
 #                 1 - (Enabled, tout level accepte)
 
 Instance.IgnoreLevel = 1
@@ -610,7 +610,7 @@ Instance.IgnoreLevel = 1
 #
 #    Instance.IgnoreRaid
 #        Ignore la condition of group of raid for entrer in the raids.
-#        Default: 0 - (Disabled, group raid required)
+#        Default: 0 - (Disabled, group raid requis)
 #                 1 - (Enabled, entree solo possible)
 
 Instance.IgnoreRaid = 1
@@ -644,7 +644,7 @@ Quests.IgnoreRaid = 0
 #
 #    Quests.IgnoreAutoAccept
 #        Ignore le flag of acceptation automatique the quests.
-#        The players devront accepter manually all the quests.
+#        The players devront accepter manuellement all the quests.
 #        Default: 0 - (Disabled, the values DB appliquent)
 #                 1 - (Enabled, acceptation manuelle obligatoire)
 
@@ -653,7 +653,7 @@ Quests.IgnoreAutoAccept = 0
 #
 #    Quests.IgnoreAutoComplete
 #        Ignore le flag of completion automatique the quests.
-#        The players devront rendre manually all the quests.
+#        The players devront rendre manuellement all the quests.
 #        Default: 0 - (Disabled, the values DB appliquent)
 #                 1 - (Enabled, rendu manuel obligatoire)
 
@@ -669,7 +669,7 @@ MaxPrimaryTradeSkill = 2
 
 #
 #    MinPetitionSigns
-#        Number of signatures required on a charter to create a guild.
+#        Number of signatures requises on a charter for create a guild.
 #        Range: 0-4
 #        Default: 4
 
@@ -677,7 +677,7 @@ MinPetitionSigns = 0
 
 #
 #    MailDeliveryDelay
-#        Delai (in seconds) of livraison of mail contenant the items.
+#        Delai (en seconds) of livraison of mail contenant the items.
 #        Default: 3600 - (1 hour)
 
 MailDeliveryDelay = 3600
@@ -715,7 +715,7 @@ BeepAtStart = 1
 
 #
 #    PlayerStart.String
-#        Message show on first login of a new character.
+#        Message show a la premiere connection of a new character.
 #        Default: "" - (Disabled)
 
 PlayerStart.String = ""
@@ -724,7 +724,7 @@ PlayerStart.String = ""
 #    Motd
 #        Message of day, show a chaque connection of a player.
 #        Use '@' for a retour a la line.
-#        Echapper the characters speciaux with '\'.
+#        Echapper the caracteres speciaux with '\'.
 #        Example: "Bienvenue on le server of Jean@Bonne aventure !"
 #        Default:  "Welcome to a Trinity Core server."
 
@@ -764,7 +764,7 @@ DBC.EnforceItemAttributes = 1
 
 #
 #    AccountInstancesPerHour
-#        Maximum instances differentes qu'a player can entrer per hour.
+#        Number maximum of instances differentes qu'a player can entrer per hour.
 #        Anti-farm : limit le number of reset of instances.
 #        Default: 5
 
@@ -773,7 +773,7 @@ AccountInstancesPerHour = 255
 #
 #    MaxAccountsOnline
 #        Maximum accounts connectes simultanement.
-#        The connections additional are placees en file of wait.
+#        The connections supplementaires are placees en file of attente.
 #        Default: 1000
 
 MaxAccountsOnline = 1000
@@ -785,14 +785,14 @@ MaxAccountsOnline = 1000
 # GUILD SETTINGS
 #
 #    Guild.LevelingEnabled
-#        Enable the system of levels of guild.
+#        Enabled le systeme of levels of guild.
 #        Default: 1 - (Enabled)
 
 Guild.LevelingEnabled = 1
 
 #
 #    Guild.SaveInterval
-#        Interval (in minutes) between the saves of experience of guild.
+#        Interval (en minutes) between the saves of experience of guild.
 #        Default: 15
 
 Guild.SaveInterval = 15
@@ -851,7 +851,7 @@ Currency.ResetHour = 6
 # CROSS-FACTION INTERACTION
 #
 #    AllowTwoSide.Accounts
-#        Allow the creation of characters the deux factions on le same account.
+#        Allow la creation of characters the deux factions on le same account.
 #        Default: 1 - (Allowed)
 #                 0 - (Forbidden)
 
@@ -894,7 +894,7 @@ AllowTwoSide.Interaction.Guild = 0
 
 #
 #    AllowTwoSide.Interaction.Auction
-#        Allow the auctions between factions (shared auction house).
+#        Allow the auctions between factions (hotel the ventes partage).
 #        Default: 0 - (Forbidden)
 
 AllowTwoSide.Interaction.Auction = 0
@@ -977,14 +977,14 @@ CreatureFamilyAssistanceRadius = 10
 
 #
 #    CreatureFamilyAssistanceDelay
-#        Delai (in milliseconds) before the appel a the aide of a creature.
+#        Delai (en millisecondes) before the appel a the aide of a creature.
 #        Default: 1500 - (1.5 seconds)
 
 CreatureFamilyAssistanceDelay = 1500
 
 #
 #    CreatureFamilyFleeDelay
-#        Duration (in milliseconds) pendant laquelle a creature can fuir
+#        Duration (en millisecondes) pendant laquelle a creature can fuir
 #        if no assistance nota ete trouvee.
 #        Default: 7000 - (7 seconds)
 
@@ -999,7 +999,7 @@ WorldBossLevelDiff = 3
 
 #
 #    Corpse.Decay.*
-#        Duration (in seconds) before la decomposition of corpse of a creature
+#        Duration (en seconds) before la decomposition of corpse of a creature
 #        il notest pas fouille ou depece.
 #        Default: 60   - (1 min,   NORMAL)
 #                 300  - (5 min,   RARE)
@@ -1079,7 +1079,7 @@ ListenRange.Yell = 300
 
 #
 #    Creature.MovingStopTimeForPlayer
-#        Duration (in milliseconds) pendant laquelle a creature reste immobile
+#        Duration (en millisecondes) pendant laquelle a creature reste immobile
 #        after a interaction with a player (ex: dialogue with a PNJ).
 #        Default: 180000 - (3 minutes)
 
@@ -1115,14 +1115,14 @@ Visibility.Distance.BGArenas = 533
 
 #
 #    Visibility.RelocationLowerLimit
-#        Distance minimum of deplacement for declencher a update a day of visibilite.
+#        Distance minimale of deplacement for declencher a update a day of visibilite.
 #        Default: 20
 
 Visibility.RelocationLowerLimit = 20
 
 #
 #    Visibility.AINotifyDelay
-#        Delai (in milliseconds) between the notifications of visibilite for the IA the creatures.
+#        Delai (en millisecondes) between the notifications of visibilite for the IA the creatures.
 #        Default: 1000
 
 Visibility.AINotifyDelay = 1000
@@ -1157,7 +1157,7 @@ Rate.Skill.Discovery = 1
 #
 #    Rate.Drop.Item.*
 #    Rate.Drop.Money
-#        Multipliers of drop of items per quality and of argent.
+#        Multipliers of drop of items by qualite and of argent.
 #        Default: 1
 
 Rate.Drop.Item.Poor             = 1
@@ -1212,10 +1212,10 @@ Rate.Damage.Fall = 1
 
 #
 #    Rate.Auction.*
-#        Multipliers for the auction house :
+#        Multipliers for the hotel the ventes :
 #        Time    = duration the auctions
-#        Deposit = depot a la update en selling
-#        Cut     = commission prelevee a la selling
+#        Deposit = depot a la update en vente
+#        Cut     = commission prelevee a la vente
 #        Default: 1
 
 Rate.Auction.Time    = 1
@@ -1304,7 +1304,7 @@ SkillGain.Gathering = 1
 
 #
 #    SkillChance.*
-#        Chance (en %) of gain of skill based on la couleur of the recette.
+#        Chance (en %) of gain of skill selon la couleur of the recette.
 #        Default: 100 - (Orange, garanti)
 #                 75  - (Jaune, probable)
 #                 25  - (Vert, faible)
@@ -1341,7 +1341,7 @@ DurabilityLoss.OnDeath = 0
 
 #
 #    DurabilityLossChance.Damage
-#        Chance of lose of the durabilite on a item equip en subissant the damage.
+#        Chance of lose of the durabilite on a item equipe en subissant the damage.
 #        Default: 0.5 - (100/0.5 = all the 200 damage, 1 item loses of the durabilite)
 
 DurabilityLossChance.Damage = 0.0000001
@@ -1424,7 +1424,7 @@ AutoBroadcast.Center = 0
 
 #
 #    AutoBroadcast.Timer
-#        Interval (in milliseconds) between the diffusions automatiques.
+#        Interval (en millisecondes) between the diffusions automatiques.
 #        Default: 60000 - (60 seconds)
 
 AutoBroadcast.Timer = 60000
@@ -1444,7 +1444,7 @@ Battleground.CastDeserter = 1
 
 #
 #    Battleground.QueueAnnouncer.Enable
-#        Annonce the etat of the file of wait the champs of bataille in le chat.
+#        Annonce the etat of the file of attente the champs of bataille in le chat.
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
 
@@ -1452,8 +1452,8 @@ Battleground.QueueAnnouncer.Enable = 0
 
 #
 #    Battleground.QueueAnnouncer.PlayerOnly
-#        Type of annonce of the file of wait.
-#        Default: 0 - (Message system, visible by all)
+#        Type of annonce of the file of attente.
+#        Default: 0 - (Message systeme, visible by all)
 #                 1 - (Prive, visible only by the players en file)
 
 Battleground.QueueAnnouncer.PlayerOnly = 0
@@ -1468,8 +1468,8 @@ Battleground.InvitationType = 0
 
 #
 #    BattleGround.PrematureFinishTimer
-#        Duration (in milliseconds) before la fin prematuree of a champ of bataille
-#        if a equip nota pas assez of players.
+#        Duration (en millisecondes) before la fin prematuree of a champ of bataille
+#        if a equipe nota pas assez of players.
 #        Default: 300000 - (5 minutes)
 #                 0      - (Disabled, non recommande)
 
@@ -1477,7 +1477,7 @@ BattleGround.PrematureFinishTimer = 300000
 
 #
 #    BattleGround.PremadeGroupWaitForMatch
-#        Duration (in milliseconds) pendant laquelle a group pre-forme attend
+#        Duration (en millisecondes) pendant laquelle a group pre-forme attend
 #        a group adverse correspondant before of entrer.
 #        Default: 1800000 - (30 minutes)
 #                 0       - (Disabled)
@@ -1522,35 +1522,35 @@ Wintergrasp.PlayerMax = 100
 
 #
 #    Wintergrasp.PlayerMin
-#        Minimum players required for Joug-of hiver.
+#        Minimum players requis for Joug-of hiver.
 #        Default: 0
 
 Wintergrasp.PlayerMin = 0
 
 #
 #    Wintergrasp.PlayerMinLvl
-#        Level minimum required for participer a Joug-of hiver.
+#        Level minimum requis for participer a Joug-of hiver.
 #        Default: 77
 
 Wintergrasp.PlayerMinLvl = 77
 
 #
 #    Wintergrasp.BattleTimer
-#        Duration (in minutes) of a bataille of Joug-of hiver.
+#        Duration (en minutes) of a bataille of Joug-of hiver.
 #        Default: 30
 
 Wintergrasp.BattleTimer = 30
 
 #
 #    Wintergrasp.NoBattleTimer
-#        Interval (in minutes) between the batailles of Joug-of hiver.
+#        Interval (en minutes) between the batailles of Joug-of hiver.
 #        Default: 150
 
 Wintergrasp.NoBattleTimer = 150
 
 #
 #    Wintergrasp.CrashRestartTimer
-#        Delai (in minutes) before le restart of Joug-of hiver if le server
+#        Delai (en minutes) before le restart of Joug-of hiver if le server
 #        a plante pendant a bataille en cours.
 #        Default: 10
 
@@ -1582,7 +1582,7 @@ TolBarad.NoBattleTimer = 150
 # ARENA
 #
 #    Arena.MaxRatingDifference
-#        Difference of cote maximum between deux equipes for a match classe.
+#        Difference of cote maximale between deux equipes for a match classe.
 #        Default: 150 - (Enabled)
 #                 0   - (Disabled, pas of limit)
 
@@ -1590,7 +1590,7 @@ Arena.MaxRatingDifference = 150
 
 #
 #    Arena.RatingDiscardTimer
-#        Duration (in seconds) after laquelle la difference of cote is ignoree
+#        Duration (en seconds) after laquelle la difference of cote is ignoree
 #        for la recherche of match.
 #        Default: 600 - (10 minutes)
 #                 0   - (Disabled)
@@ -1599,14 +1599,14 @@ Arena.RatingDiscardTimer = 600
 
 #
 #    Arena.RatedUpdateTimer
-#        Interval (in milliseconds) between the checks of matchs classes.
+#        Interval (en millisecondes) between the checks of matchs classes.
 #        Default: 5000 - (5 seconds)
 
 Arena.RatedUpdateTimer = 5000
 
 #
 #    Arena.QueueAnnouncer.Enable
-#        Annonce the etat of the file of wait of arene in le chat.
+#        Annonce the etat of the file of attente of arene in le chat.
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
 
@@ -1679,14 +1679,14 @@ BlackMarket.Enabled = 0
 
 #
 #    BlackMarket.MaxAuctions
-#        Maximum auctions simultanees on le Marche Noir.
+#        Number maximum of auctions simultanees on le Marche Noir.
 #        Default: 12
 
 BlackMarket.MaxAuctions = 12
 
 #
 #    BlackMarket.UpdatePeriod
-#        Interval (in hours) of renouvellement the auctions of Marche Noir.
+#        Interval (en hours) of renouvellement the auctions of Marche Noir.
 #        Default: 24
 
 BlackMarket.UpdatePeriod = 24
@@ -1698,22 +1698,22 @@ BlackMarket.UpdatePeriod = 24
 # AUCTION HOUSE BOT (AHBOT) (AHBot)
 #
 #    AuctionHouseBot.Account
-#        Account ID used by the bot. If non-zero, the bot's auctions and bids
-#        will be randomly assigned to a character of this account.
+#        ID of account used by le bot. Si non-zero, the auctions and offres of bot
+#        seront assignees aleatoirement a a character of this account.
 #        Default: 0
 
 AuctionHouseBot.Account = 0
 
 #
 #    AuctionHouseBot.Update.Interval
-#        Interval (in seconds) of update a day of bot.
+#        Interval (en seconds) of update a day of bot.
 #        Default: 20
 
 AuctionHouseBot.Update.Interval = 20
 
 #
 #    AuctionHouseBot.Seller.Enabled
-#        Enabled/Disabled the bot's listing functionality.
+#        Enabled/Disabled la fonctionnalite of update en vente by le bot.
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
 
@@ -1721,7 +1721,7 @@ AuctionHouseBot.Seller.Enabled = 0
 
 #
 #    AuctionHouseBot.FACTION.Items.Amount.Ratio
-#        Percentage of items mis en selling per faction (Alliance/Horde/Neutre).
+#        Percentage of items mis en vente by faction (Alliance/Horde/Neutre).
 #        0 = disabled for this faction.
 #        Default: 100
 
@@ -1731,7 +1731,7 @@ AuctionHouseBot.Neutral.Items.Amount.Ratio = 100
 
 #
 #    AuctionHouseBot.MinTime / MaxTime
-#        Min/max auction duration (in hours) for bot-created auctions.
+#        Duration minimale/maximale (en hours) the auctions creees by le bot.
 #        Default: 1 / 72
 
 AuctionHouseBot.MinTime = 1
@@ -1739,7 +1739,7 @@ AuctionHouseBot.MaxTime = 72
 
 #
 #    AuctionHouseBot.Class.CLASS.Allow.Zero
-#        Include the items without prix of buying ou of selling.
+#        Inclure the items without prix of achat ou of vente.
 #        Default: 0 - (Disabled)
 
 AuctionHouseBot.Class.Consumable.Allow.Zero = 0
@@ -1759,31 +1759,31 @@ AuctionHouseBot.Class.Glyph.Allow.Zero = 0
 
 #
 #    AuctionHouseBot.Items.Vendor
-#        Include the items purchasable from vendors.
+#        Inclure the items achetables chez the marchands.
 #        Default: 0
 
 AuctionHouseBot.Items.Vendor = 1
 
 #
 #    AuctionHouseBot.Items.Loot
-#        Include items that can be looted or fished.
+#        Inclure the items pouvant be pilles ou peches.
 #        Default: 1
 
 AuctionHouseBot.Items.Loot = 1
 
 #
 #    AuctionHouseBot.Items.Misc
-#        Include the items divers.
+#        Inclure the items divers.
 #        Default: 0
 
 AuctionHouseBot.Items.Misc = 1
 
 #
 #    AuctionHouseBot.Bind.*
-#        Types of binding allowed for la update en selling :
-#        No     = items without binding          (Default: 1)
-#        Pickup = lie quand pickup            (Default: 0)
-#        Equip  = lie quand equip             (Default: 1)
+#        Types of liaison allowed for la update en vente :
+#        No     = items without liaison          (Default: 1)
+#        Pickup = lie quand ramasse            (Default: 0)
+#        Equip  = lie quand equipe             (Default: 1)
 #        Use    = lie quand used            (Default: 1)
 #        Quest  = items of quest             (Default: 0)
 
@@ -1795,22 +1795,22 @@ AuctionHouseBot.Bind.Quest = 0
 
 #
 #    AuctionHouseBot.LockBox.Enabled
-#        Include locked containers in the auction house.
+#        Inclure the coffres verrouilles a the hotel the ventes.
 #        Default: 0
 
 AuctionHouseBot.LockBox.Enabled = 1
 
 #
 #    AuctionHouseBot.ItemsPerCycle.Boost
-#        Number of items ajoutes per cycle en mode catch-up (to the startup with a table empty).
+#        Number of items ajoutes by cycle en mode rattrapage (to the startup with a table empty).
 #        Default: 1000
 
 AuctionHouseBot.ItemsPerCycle.Boost = 1000
 
 #
 #    AuctionHouseBot.ItemsPerCycle.Normal
-#        Number of items ajoutes per cycle en fonctionnement normal
-#        (remplacement the items sold ou expired).
+#        Number of items ajoutes by cycle en fonctionnement normal
+#        (remplacement the items vendus ou expires).
 #        Default: 20
 
 AuctionHouseBot.ItemsPerCycle.Normal = 20
@@ -1818,14 +1818,14 @@ AuctionHouseBot.ItemsPerCycle.Normal = 20
 #
 #    AuctionHouseBot.BuyPrice.Seller
 #        Base of calcul of prix of depart the auctions of bot.
-#        Default: 1 - (Price of selling to the marchand)
-#                 0 - (Price of buying to the marchand)
+#        Default: 1 - (Prix of vente to the marchand)
+#                 0 - (Prix of achat to the marchand)
 
 AuctionHouseBot.BuyPrice.Seller = 1
 
 #
 #    AuctionHouseBot.BidPrice.Min / Max
-#        Range of prix of depart en percentage of prix of buying immediate.
+#        Fourchette of prix of depart en percentage of prix of achat immediat.
 #        Default: 0.6 / 0.9
 
 AuctionHouseBot.BidPrice.Min = 0.6
@@ -1833,7 +1833,7 @@ AuctionHouseBot.BidPrice.Max = 0.9
 
 #
 #    AuctionHouseBot.FACTION.Price.Ratio
-#        Percentage of modification the prix per faction. 100 = pas of modification.
+#        Percentage of modification the prix by faction. 100 = pas of modification.
 #        Default: 100
 
 AuctionHouseBot.Alliance.Price.Ratio = 100
@@ -1842,7 +1842,7 @@ AuctionHouseBot.Neutral.Price.Ratio = 100
 
 #
 #    AuctionHouseBot.Items.QUALITY.Price.Ratio
-#        Percentage of modification the prix per quality of item. 100 = pas of modification.
+#        Percentage of modification the prix by qualite of item. 100 = pas of modification.
 #        Default: 100
 
 AuctionHouseBot.Items.Gray.Price.Ratio = 100
@@ -1855,7 +1855,7 @@ AuctionHouseBot.Items.Yellow.Price.Ratio = 100
 
 #
 #    AuctionHouseBot.Class.CLASS.Price.Ratio
-#        Percentage of modification the prix per class of item. 100 = pas of modification.
+#        Percentage of modification the prix by classe of item. 100 = pas of modification.
 #        Default: 100
 
 AuctionHouseBot.Class.Consumable.Price.Ratio = 100
@@ -1876,7 +1876,7 @@ AuctionHouseBot.Class.Glyph.Price.Ratio = 100
 
 #
 #    AuctionHouseBot.Items.ItemLevel.Min / Max
-#        Filter of level of item min/max for the updates en selling of bot.
+#        Filtre of level of item min/max for the updates en vente of bot.
 #        Default: 0 - (Disabled)
 
 AuctionHouseBot.Items.ItemLevel.Min = 0
@@ -1884,7 +1884,7 @@ AuctionHouseBot.Items.ItemLevel.Max = 0
 
 #
 #    AuctionHouseBot.Items.ReqLevel.Min / Max
-#        Filter of level required min/max for the updates en selling of bot.
+#        Filtre of level requis min/max for the updates en vente of bot.
 #        Default: 0 - (Disabled)
 
 AuctionHouseBot.Items.ReqLevel.Min = 0
@@ -1892,7 +1892,7 @@ AuctionHouseBot.Items.ReqLevel.Max = 0
 
 #
 #    AuctionHouseBot.Items.ReqSkill.Min / Max
-#        Filter of skill required min/max for the updates en selling of bot.
+#        Filtre of skill requise min/max for the updates en vente of bot.
 #        Default: 0 - (Disabled)
 
 AuctionHouseBot.Items.ReqSkill.Min = 0
@@ -1900,7 +1900,7 @@ AuctionHouseBot.Items.ReqSkill.Max = 0
 
 #
 #    AuctionHouseBot.Items.Amount.*
-#        Number of items per quality to display at the auction house.
+#        Number of items by qualite a display a the hotel the ventes.
 #        Ajuste by AuctionHouseBot.FACTION.Items.Amount.Ratio.
 #        Default: 0/2000/2500/1500/1000/0/0 (Gris/Blanc/Vert/Bleu/Violet/Orange/Jaune)
 
@@ -1914,7 +1914,7 @@ AuctionHouseBot.Items.Amount.Yellow = 0
 
 #
 #    AuctionHouseBot.Class.*
-#        Preference of classe of items a mettre en selling. De 0 (disabled) a 10 (max).
+#        Preference of classe of items a mettre en vente. De 0 (disabled) a 10 (max).
 
 AuctionHouseBot.Class.Consumable = 6
 AuctionHouseBot.Class.Container = 4
@@ -1938,46 +1938,46 @@ AuctionHouseBot.Class.Glyph = 3
 ###################################################################################################
 # AUCTION HOUSE BOT - FINE TUNING
 #
-#    Additional filters to limit character levels
-#    able to benefit from the bot of auction house.
+#    Filtres supplementaires for limit the levels of character
+#    pouvant beneficier of bot of hotel the ventes.
 #
 #    AuctionHouseBot.Class.Misc.Mount.ReqLevel.Min / Max
-#        Required-level filter for mounts. Default: 0
+#        Filtre of level requis for the mounts. Default: 0
 
 AuctionHouseBot.Class.Misc.Mount.ReqLevel.Min = 0
 AuctionHouseBot.Class.Misc.Mount.ReqLevel.Max = 0
 
 #
 #    AuctionHouseBot.Class.Misc.Mount.ReqSkill.Min / Max
-#        Filter of skill required for the mounts. Default: 0
+#        Filtre of skill requise for the mounts. Default: 0
 
 AuctionHouseBot.Class.Misc.Mount.ReqSkill.Min = 0
 AuctionHouseBot.Class.Misc.Mount.ReqSkill.Max = 0
 
 #
 #    AuctionHouseBot.Class.Glyph.ReqLevel.Min / Max
-#        Required-level filter for glyphs. Default: 0
+#        Filtre of level requis for the glyphes. Default: 0
 
 AuctionHouseBot.Class.Glyph.ReqLevel.Min = 0
 AuctionHouseBot.Class.Glyph.ReqLevel.Max = 0
 
 #
 #    AuctionHouseBot.Class.Glyph.ItemLevel.Min / Max
-#        Item-level filter for glyphs. Default: 0
+#        Filtre of level of item for the glyphes. Default: 0
 
 AuctionHouseBot.Class.Glyph.ItemLevel.Min = 0
 AuctionHouseBot.Class.Glyph.ItemLevel.Max = 0
 
 #
 #    AuctionHouseBot.Class.TradeGood.ItemLevel.Min / Max
-#        Item-level filter for trade goods. Default: 0
+#        Filtre of level of item for the marchandises. Default: 0
 
 AuctionHouseBot.Class.TradeGood.ItemLevel.Min = 0
 AuctionHouseBot.Class.TradeGood.ItemLevel.Max = 0
 
 #
 #    AuctionHouseBot.Class.Container.ItemLevel.Min / Max
-#        Item-level filter for containers. Default: 0
+#        Filtre of level of item for the conteneurs. Default: 0
 
 AuctionHouseBot.Class.Container.ItemLevel.Min = 0
 AuctionHouseBot.Class.Container.ItemLevel.Max = 0
@@ -2025,7 +2025,7 @@ AuctionHouseBot.Class.RandomStackRatio.Glyph = 0
 # AUCTION HOUSE BOT - BUYER
 #
 #    AuctionHouseBot.Buyer.Enabled
-#        Enabled/Disabled the bot's buying functionality.
+#        Enabled/Disabled la fonctionnalite of achat by le bot.
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
 
@@ -2033,7 +2033,7 @@ AuctionHouseBot.Buyer.Enabled = 0
 
 #
 #    AuctionHouseBot.Buyer.FACTION.Enabled
-#        Enabled/Disabled the acheteur per faction.
+#        Enabled/Disabled the acheteur by faction.
 #        Default: 0
 
 AuctionHouseBot.Buyer.Alliance.Enabled = 0
@@ -2042,15 +2042,15 @@ AuctionHouseBot.Buyer.Neutral.Enabled = 0
 
 #
 #    AuctionHouseBot.Buyer.ChanceFactor
-#        Value k in la formule of chance of buying : 100^(1 + (1 - (Offre / PrixObjet)) / k)
-#        Plus la value is elevee, plus the bot achete the items surpayes.
+#        Value k in la formule of chance of achat : 100^(1 + (1 - (Offre / PrixObjet)) / k)
+#        Plus la value is elevee, plus le bot achete the items surpayes.
 #        Default: 2
 
 AuctionHouseBot.Buyer.ChanceFactor = 2
 
 #
 #    AuctionHouseBot.Buyer.Baseprice.QUALITY
-#        Base price (in copper) for items without a price, per quality.
+#        Prix of base (en cuivre) for the items without prix, by qualite.
 #        Base on the prix moyens the items of chaque qualite.
 
 AuctionHouseBot.Buyer.Baseprice.Gray = 3504
@@ -2063,8 +2063,8 @@ AuctionHouseBot.Buyer.Baseprice.Yellow = 407406
 
 #
 #    AuctionHouseBot.Buyer.ChanceMultiplier.QUALITY
-#        Multiplier of chance of buying per quality.
-#        100 = 100% of original chance, 200 = double chance.
+#        Multiplier of chance of achat by qualite.
+#        100 = 100% of the chance originale, 200 = double chance.
 #        Default: 100
 
 AuctionHouseBot.Buyer.ChanceMultiplier.Gray = 100
@@ -2077,8 +2077,8 @@ AuctionHouseBot.Buyer.ChanceMultiplier.Yellow = 100
 
 #
 #    AuctionHouseBot.Buyer.Recheck.Interval
-#        Interval (in minutes) between deux evaluations of a same item en selling.
-#        Plus la value is basse, plus the bot a of chances of acheter.
+#        Interval (en minutes) between deux evaluations of a same item en vente.
+#        Plus la value is basse, plus le bot a of chances of acheter.
 #        Default: 20
 
 AuctionHouseBot.Buyer.Recheck.Interval = 20
@@ -2098,8 +2098,8 @@ AuctionHouseBot.Buyer.Recheck.Interval = 20
 # NETWORK CONFIGURATION
 #
 #    Network.Threads
-#        Number of network threads.
-#        Recommendation: 1 thread per 1000 connections.
+#        Number of threads network.
+#        Recommendation: 1 thread for 1000 connections.
 #        Default: 1
 
 Network.Threads = 1
@@ -2107,7 +2107,7 @@ Network.Threads = 1
 #
 #    Network.OutKBuff
 #        Taille (en octets) of tampon of sortie of noyau (SO_SNDBUF).
-#        Default: -1 - (Use the system default value)
+#        Default: -1 - (Used la value by defaut of systeme)
 
 Network.OutKBuff = -1
 
@@ -2163,7 +2163,7 @@ Ra.Port = 3443
 
 #
 #    Ra.MinLevel
-#        Security level minimum for use la console distante.
+#        Level of securite minimum for use la console distante.
 #        Default: 3 - (Administrateur)
 
 Ra.MinLevel = 3
@@ -2198,7 +2198,7 @@ SOAP.Port = 7878
 #
 #    UseProcessors
 #        Masque of processeurs for systemes multi-processeurs (Windows).
-#        Default: 0 - (Selection by the system)
+#        Default: 0 - (Selection by le systeme)
 
 UseProcessors = 0
 
@@ -2251,7 +2251,7 @@ GridUnload = 1
 
 #
 #    SocketTimeOutTime
-#        Delai (in milliseconds) before disconnection of a session inactive
+#        Delai (en millisecondes) before disconnection of a session inactive
 #        on the ecran of selection of character.
 #        Default: 900000 - (15 minutes)
 
@@ -2259,44 +2259,44 @@ SocketTimeOutTime = 900000
 
 #
 #    SessionAddDelay
-#        Delai (in microseconds) after the authentification before the ajout
-#        of the connection a la session world. Evite the problemes of concurrence.
+#        Delai (en microsecondes) after the authentification before the ajout
+#        of the connection a la session monde. Evite the problemes of concurrence.
 #        Default: 10000 - (10 millisecondes)
 
 SessionAddDelay = 10000
 
 #
 #    GridCleanUpDelay
-#        Delai (in milliseconds) before le nettoyage the grilles inactives.
+#        Delai (en millisecondes) before le nettoyage the grilles inactives.
 #        Default: 300000 - (5 minutes)
 
 GridCleanUpDelay = 300000
 
 #
 #    MapUpdateInterval
-#        Interval (in milliseconds) between chaque update a day the maps.
-#        C'est le "tick" principal of server world.
+#        Interval (en millisecondes) between chaque update a day the maps.
+#        C'est le "tick" principal of server monde.
 #        Default: 100 - (0.1 second)
 
 MapUpdateInterval = 100
 
 #
 #    ChangeWeatherInterval
-#        Interval (in milliseconds) between the updates a day of the meteo.
+#        Interval (en millisecondes) between the updates a day of the meteo.
 #        Default: 600000 - (10 minutes)
 
 ChangeWeatherInterval = 600000
 
 #
 #    PlayerSaveInterval
-#        Interval (in milliseconds) between the saves automatiques the players.
+#        Interval (en millisecondes) between the saves automatiques the players.
 #        Default: 90000 - (90 seconds)
 
 PlayerSaveInterval = 90000
 
 #
 #    mmap.enablePathFinding
-#        Enabled the pathfinding by MMAPs (navmesh).
+#        Enabled le pathfinding by MMAPs (navmesh).
 #        Recommande for a deplacement intelligent the creatures.
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
@@ -2317,7 +2317,7 @@ vmap.enableHeight = 1
 #
 #    vmap.petLOS
 #        Check of the line of vue for the pets,
-#        emfishing the attaques a travers the murs.
+#        empeche the attaques a travers the murs.
 #        Default: 1 - (Enabled)
 #                 0 - (Disabled, moins of charge CPU)
 
@@ -2343,7 +2343,7 @@ DetectPosCollision = 1
 
 #
 #    TargetPosRecalculateRange
-#        Distance maximum between le point cible of deplacement and the item cible
+#        Distance maximale between le point cible of deplacement and the item cible
 #        before recalcul of path.
 #        Range:  0.5-5.0
 #        Default: 1.5
@@ -2354,7 +2354,7 @@ TargetPosRecalculateRange = 1.5
 
 #
 #    UpdateUptimeInterval
-#        Interval (in minutes) of update a day of temps of fonctionnement
+#        Interval (en minutes) of update a day of temps of fonctionnement
 #        of realm in la base auth.
 #        Default: 10
 
@@ -2362,7 +2362,7 @@ UpdateUptimeInterval = 10
 
 #
 #    MaxCoreStuckTime
-#        Duration (in seconds) before a crash force if le server is fige.
+#        Duration (en seconds) before a crash force if le server is fige.
 #        Default: 0   - (Disabled)
 #                 10+ - (Enabled, recommande 10+)
 
@@ -2370,7 +2370,7 @@ MaxCoreStuckTime = 0
 
 #
 #    MaxMapStuckTime
-#        Duration (in seconds) before le restart force of a map figee.
+#        Duration (en seconds) before le restart force of a map figee.
 #        Default: 0   - (Disabled)
 #                 10+ - (Enabled, recommande 10+)
 
@@ -2428,7 +2428,7 @@ PersistentCharacterCleanFlags = 0
 # SERVER PROCESS
 #
 #    PidFile
-#        File PID of processus of server world (for scripts of gestion).
+#        File PID of processus of server monde (for scripts of gestion).
 #        Example: "./world.pid"
 #        Default:  ""  - (Disabled)
 
@@ -2441,7 +2441,7 @@ PidFile = ""
 # ANTICHEAT
 #
 #    Anticheat.Enable
-#        Enabled/disabled the system anticheat.
+#        Enabled/disabled le systeme anticheat.
 #        Default: 1 - (Enabled)
 #                 0 - (Disabled)
 
@@ -2498,7 +2498,7 @@ Anticheat.LogData        = 0
 # WARDEN
 #
 #    Warden.Enabled
-#        Enable the system anticheat Warden (check memoire client).
+#        Enabled le systeme anticheat Warden (check memoire client).
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
 
@@ -2506,7 +2506,7 @@ Warden.Enabled = 0
 
 #
 #    WardenExtended.Enabled
-#        Enable the system anticheat etendu (checks additional).
+#        Enabled le systeme anticheat etendu (checks supplementaires).
 #        Default: 0 - (Disabled)
 #                 1 - (Enabled)
 
@@ -2514,28 +2514,28 @@ WardenExtended.Enabled = 0
 
 #
 #    Warden.BasicSecurityLevelReq
-#        Security level en dessous duquel the checks of base are envoyees.
+#        Level of securite en dessous duquel the checks of base are envoyees.
 #        Default: 40
 
 Warden.BasicSecurityLevelReq = 40
 
 #
 #    Warden.MaxSecurityLevelReq
-#        Security level en dessous duquel the checks avancees are envoyees.
+#        Level of securite en dessous duquel the checks avancees are envoyees.
 #        Default: 100
 
 Warden.MaxSecurityLevelReq = 100
 
 #
 #    Warden.ClientResponseDelay
-#        Delai (in milliseconds) before disconnection of client which ne repond pas.
+#        Delai (en millisecondes) before disconnection of client which ne repond pas.
 #        Default: 60000 - (1 minute)
 
 Warden.ClientResponseDelay = 60000
 
 #
 #    Warden.ClientCheckHoldOff
-#        Delai (in milliseconds) between deux envois of checks to the client.
+#        Delai (en millisecondes) between deux envois of checks to the client.
 #        A value basse augmente le trafic and la charge on the client and le server.
 #        Default: 25000 - (25 seconds)
 
@@ -2548,7 +2548,7 @@ Warden.ClientCheckHoldOff = 25000
 # SQL UPDATES
 #
 #    Updates.EnableDatabases
-#        Masque of bits the bases of data a mettre a day automatically.
+#        Masque of bits the bases of data a mettre a day automatiquement.
 #        DATABASE_LOGIN     = 1  (Base auth)
 #        DATABASE_CHARACTER = 2  (Base characters)
 #        DATABASE_WORLD     = 4  (Base world)
@@ -2561,7 +2561,7 @@ Updates.EnableDatabases = 15
 
 #
 #    Updates.AutoSetup
-#        Peuple automatically the bases of data empty to the first startup.
+#        Peuple automatiquement the bases of data empty to the premier startup.
 #        Default: 1 - (Enabled)
 #                 0 - (Disabled)
 
@@ -2612,7 +2612,7 @@ Updates.CleanDeadRefMaxCount = 3
 #
 #    HotSwap.Enabled
 #        Enabled le reload dynamique the scripts (requires DYNAMIC_LINKING=1 a la compilation).
-#        Reload automatically the scripts modifies.
+#        Reload automatiquement the scripts modifies.
 #        Default: 1 - (Enabled)
 #                 0 - (Disabled)
 
@@ -2658,8 +2658,8 @@ HotSwap.EnableInstall = 1
 
 #
 #    HotSwap.EnablePrefixCorrection
-#        Corrige automatically CMAKE_INSTALL_PREFIX to the emplacement
-#        actuel of binaire in the system of files.
+#        Corrige automatiquement CMAKE_INSTALL_PREFIX to the emplacement
+#        actuel of binaire in le systeme of files.
 #        Default: 1 - (Enabled)
 
 HotSwap.EnablePrefixCorrection = 1
@@ -2680,14 +2680,14 @@ HotSwap.ReCompilerBuildType = ""
 # LOG CONFIGURATION
 #
 #    LogDB.Opt.ClearInterval
-#        Interval (in minutes) of timer of nettoyage of the table `logs`.
+#        Interval (en minutes) of timer of nettoyage of the table `logs`.
 #        Default: 10
 
 LogDB.Opt.ClearInterval = 10
 
 #
 #    LogDB.Opt.ClearTime
-#        Duration (in seconds) of conservation the old entrees of the table `logs`.
+#        Duration (en seconds) of conservation the old entrees of the table `logs`.
 #        Default: 1209600 - (14 days)
 #                 0       - (Disabled, ne removed never)
 
@@ -2705,7 +2705,7 @@ PacketLogFile = ""
 #
 #  Configuration the Appenders (destinations of log) :
 #    Appender.name
-#        Format: Type,NivwaterLog,Flags,optionnel1,optionnel2,optionnel3
+#        Format: Type,NiveauLog,Flags,optionnel1,optionnel2,optionnel3
 #
 #        Type :
 #            0 - None
@@ -2713,7 +2713,7 @@ PacketLogFile = ""
 #            2 - File
 #            3 - Base of data
 #
-#        NivwaterLog :
+#        NiveauLog :
 #            0 - Disabled
 #            1 - Trace
 #            2 - Debug
@@ -2728,7 +2728,7 @@ PacketLogFile = ""
 #            2  - Prefixe level of log
 #            4  - Prefixe type of filtre
 #            8  - Ajoute horodatage to the name of file (YYYY-MM-DD_HH-MM-SS, Type=2)
-#            16 - Save of file existing before ecrasement (Mode=w)
+#            16 - Save of file existant before ecrasement (Mode=w)
 #
 #        Couleurs (optionnel1 if Type=Console) :
 #            Format: "fatal error warn info debug trace"
@@ -2747,9 +2747,9 @@ Appender.DBErrors=2,2,0,DBErrors.log
 
 #  Configuration the Loggers (quoi journaliser) :
 #    Logger.name
-#        Format: NivwaterLog,ListeAppenders
+#        Format: NiveauLog,ListeAppenders
 #
-#        NivwaterLog : 0=Disabled, 1=Trace, 2=Debug, 3=Info, 4=Warn, 5=Error, 6=Fatal
+#        NiveauLog : 0=Disabled, 1=Trace, 2=Debug, 3=Info, 4=Warn, 5=Error, 6=Fatal
 #        ListeAppenders : Appenders lies a this logger (separateur : space)
 #
 
@@ -2761,7 +2761,7 @@ Logger.sql.sql=5,Console DBErrors
 Logger.sql.updates=3,Console Server
 Logger.mmaps=3,Server
 
-# Loggers additional (decommenter for enable) :
+# Loggers supplementaires (decommenter for enable) :
 #Logger.addon=3,Console Server
 #Logger.ahbot=3,Console Server
 #Logger.auctionHouse=3,Console Server
