@@ -36,6 +36,7 @@ void AddSC_boss_chogall();
 void AddSC_boss_ascendant_council();
 
 void AddSC_instance_blackrock_caverns();     // Blackrock Caverns
+void AddSC_bc_teleport();
 void AddSC_boss_romogg_bonecrusher();
 void AddSC_boss_corla_herald_of_twilight();
 void AddSC_boss_karsh_steelbender();
@@ -129,6 +130,7 @@ void AddSC_boss_priestess_delrissa();
 void AddSC_instance_magisters_terrace();
 void AddSC_magisters_terrace();
 
+void AddSC_coren_direbrew();                  // Molten Core (Brewfest)
 void AddSC_boss_lucifron();                  // Molten core
 void AddSC_boss_magmadar();
 void AddSC_boss_gehennas();
@@ -279,6 +281,7 @@ void AddEasternKingdomsScripts()
     AddSC_boss_ascendant_council();
 
     AddSC_instance_blackrock_caverns();     // Blackrock Caverns
+    AddSC_bc_teleport();
     AddSC_boss_romogg_bonecrusher();
     AddSC_boss_corla_herald_of_twilight();
     AddSC_boss_karsh_steelbender();
@@ -372,6 +375,7 @@ void AddEasternKingdomsScripts()
     AddSC_instance_magisters_terrace();
     AddSC_magisters_terrace();
 
+    AddSC_coren_direbrew();                  // Molten Core (Brewfest)
     AddSC_boss_lucifron();                  // Molten core
     AddSC_boss_magmadar();
     AddSC_boss_gehennas();
