@@ -1,5 +1,5 @@
 # Target Windows 10 (RS5 / 1809) as the API floor.
-# 0x0601 = Win 7 (EOL, dropped by Boost 1.85 / OpenSSL 3 / modern MSVC runtimes)
+# 0x0601 = Win 7 (EOL, unsuitable for OpenSSL 3 / modern MSVC runtimes)
 # 0x0A00 = Win 10 / Server 2016+
 add_definitions(-D_WIN32_WINNT=0x0A00)
 add_definitions(-DWINVER=0x0A00)

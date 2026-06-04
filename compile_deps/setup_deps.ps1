@@ -38,11 +38,11 @@ New-Item -ItemType Directory -Force -Path $DownloadsDir | Out-Null
 Write-Host "compile_deps root: $DepsDir" -ForegroundColor Cyan
 
 # ----- Manifest (must match compile_deps/DEPENDENCIES.md) -----
-$BoostVersion         = '1.85.0'
-$BoostFile            = 'boost_1_85_0-msvc-14.3-64.exe'
+$BoostVersion         = '1.83.0'
+$BoostFile            = 'boost_1_83_0-msvc-14.3-64.exe'
 $BoostUrl             = "https://sourceforge.net/projects/boost/files/boost-binaries/$BoostVersion/$BoostFile/download"
-$BoostSha256          = 'e63a2da99a36cce1fad28e15dd5f9d2bb9bf6f55ee8e0c543cfc15f0f5e2dc06'
-$BoostInstallDir      = Join-Path $DepsDir 'boost\boost_1_85_0'
+$BoostSha256          = '67975ce4a8799f17728ddba8e64e9b450a6bda7762643e829a96ccbbd1ca17d2'
+$BoostInstallDir      = Join-Path $DepsDir 'boost\boost_1_83_0'
 
 $OpenSslVersion       = '3.5.0'
 $OpenSslFile          = 'Win64OpenSSL-3_5_0.exe'

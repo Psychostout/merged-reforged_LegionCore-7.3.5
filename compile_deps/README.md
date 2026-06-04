@@ -16,9 +16,9 @@ compile_deps/
 │   └── LegionCoreDeps.cmake   ← auto-included by the top-level CMakeLists
 ├── mariadb/
 │   ├── source/                ← MariaDB Connector/C 3.4.8 source (vendored, ✓)
-│   ├── windows-x64/           ← prebuilt Windows binaries (populated by setup_deps.ps1)
-│   └── linux-x86_64/          ← prebuilt Linux binaries (populated by setup_deps.sh)
-├── boost/                     ← Boost 1.85+ (populated by setup script)
+│   ├── windows-x64/           ← optional drop-in prebuilt connector location
+│   └── linux-x86_64/          ← optional drop-in prebuilt connector location
+├── boost/                     ← Boost 1.83 (populated by setup script)
 ├── openssl/                   ← OpenSSL 3.x (populated by setup script)
 └── downloads/                 ← raw archive cache (vendored sha256s, ✓)
 ```
@@ -32,9 +32,10 @@ SHA-256 against the manifest in `DEPENDENCIES.md`. Nothing is fetched from
 unverified mirrors.
 
 The MariaDB Connector/C **source** (6 MB) is small enough to vendor
-verbatim, and CMake will build it as a sub-project if you don't have a
+verbatim, and CMake will build it as a sub-project if you do not have a
 prebuilt connector. This guarantees a working DB layer on any clean
-machine.
+machine. The `windows-x64/` and `linux-x86_64/` folders are optional
+drop-in override locations; they are not required for the default flow.
 
 ## Quick start
 
@@ -69,3 +70,12 @@ include(compile_deps/cmake/LegionCoreDeps.cmake OPTIONAL)
 `LegionCoreDeps.cmake` sets `BOOST_ROOT`, `MYSQL_ROOT_DIR`, `OPENSSL_ROOT_DIR`
 to point inside `compile_deps/` **only if those variables are not already set
 by the user**, so external `-D...` overrides still win.
+
+
+## After building
+
+After the server binaries are built, see `../docs/PORTABLE_SERVER_SETUP.md` for a
+recommended standalone folder layout, config placement, MariaDB setup, database
+user creation, SQL import order, and startup scripts.
+
+For a complete dependency/toolchain checklist, see `../docs/DEPENDENCY_SETUP.md`.

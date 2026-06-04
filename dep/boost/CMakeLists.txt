@@ -49,9 +49,9 @@ endif()
 
 if (WIN32)
   # On windows the requirements are higher according to the wiki.
-  set(BOOST_REQUIRED_VERSION 1.85)
+  set(BOOST_REQUIRED_VERSION 1.83)
 else()
-  set(BOOST_REQUIRED_VERSION 1.85)
+  set(BOOST_REQUIRED_VERSION 1.83)
 endif()
 
 find_package(Boost ${BOOST_REQUIRED_VERSION}

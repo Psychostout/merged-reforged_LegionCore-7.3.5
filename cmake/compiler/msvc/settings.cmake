@@ -66,7 +66,7 @@ target_compile_options(trinity-compile-option-interface
   INTERFACE
     /MP)
 
-# C++20 hygiene flags required by modern Boost (1.85+) and fmt:
+# C++20 hygiene flags required by Boost/Asio and fmt:
 #   /Zc:__cplusplus     - make __cplusplus report the real standard version
 #   /Zc:preprocessor    - C99/C++20-conforming preprocessor (Boost.PP needs it)
 #   /utf-8              - treat source AND execution charset as UTF-8 (we ship UTF-8 SQL/strings)

@@ -1,36 +1,48 @@
 // PrecompiledHeader for the `proto` static library.
 //
-// NOTE — KNOWN LIMITATION:
-//   The 13 BNet service .pb.h files (account_service, authentication_service,
-//   challenge_service, channel_service, connection_service, friends_service,
-//   game_utilities_service, notification_types, presence_service,
-//   profanity_filter_config, report_service, resource_service,
-//   user_manager_service) were NOT committed to this repository — neither as
-//   pre-generated .pb.h/.pb.cc nor as .proto source files. They are still
-//   referenced by:
-//     * src/server/bnetserver/Services/AccountService.h
-//     * src/server/bnetserver/Services/AuthenticationService.h
-//     * src/server/bnetserver/Services/ConnectionService.h
-//     * src/server/game/Services/WorldserverService.h
-//     * src/server/game/Services/WorldserverServiceDispatcher.h
-//     * src/server/shared/Realm/RealmList.cpp
-//
-//   We investigated importing them from upstream TrinityCore master but
-//   TC master has restructured the proto tree into api/{client,common}/v1/
-//   subdirectories with hundreds of files; the descriptor schemas have
-//   evolved enough (TC master targets Dragonflight/11.x) that they are NOT
-//   ABI-compatible with Legion 7.3.5's expectations. They need to be
-//   regenerated specifically for Legion 7.3.5 from a period-matched proto
-//   source set.
-//
-//   This PCH only references headers that currently exist in the tree, so
-//   `proto`, `common`, `database`, and (in static-scripts mode) all the
-//   `scripts/*` subdirectories build cleanly.
-//   `shared`, `bnetserver`, and `worldserver` need the missing BNet
-//   descriptors before they will fully link — see README.md.
+// The Legion-era BNet protobuf descriptors are committed as pre-generated
+// .pb.h/.pb.cc files under src/server/proto/Client/.  Keep this PCH in sync
+// with the descriptor set so missing files are detected early when the proto
+// target is compiled.
 
 #include "Login.pb.h"
 #include "RealmList.pb.h"
+
+// BNet service descriptors used by bnetserver, shared, and game/Services.
+#include "Client/account_service.pb.h"
+#include "Client/authentication_service.pb.h"
+#include "Client/challenge_service.pb.h"
+#include "Client/channel_service.pb.h"
+#include "Client/connection_service.pb.h"
+#include "Client/friends_service.pb.h"
+#include "Client/game_utilities_service.pb.h"
+#include "Client/notification_types.pb.h"
+#include "Client/presence_service.pb.h"
+#include "Client/profanity_filter_config.pb.h"
+#include "Client/report_service.pb.h"
+#include "Client/resource_service.pb.h"
+#include "Client/user_manager_service.pb.h"
+
+// Common BNet type descriptors referenced by the service descriptors.
+#include "Client/account_types.pb.h"
+#include "Client/attribute_types.pb.h"
+#include "Client/channel_types.pb.h"
+#include "Client/content_handle_types.pb.h"
+#include "Client/entity_types.pb.h"
+#include "Client/friends_types.pb.h"
+#include "Client/game_utilities_types.pb.h"
+#include "Client/invitation_types.pb.h"
+#include "Client/presence_types.pb.h"
+#include "Client/report_types.pb.h"
+#include "Client/resource_service.pb.h"
+#include "Client/role_types.pb.h"
+#include "Client/rpc_config.pb.h"
+#include "Client/rpc_types.pb.h"
+#include "Client/user_manager_types.pb.h"
+#include "Client/client/v1/channel_id.pb.h"
+#include "Client/global_extensions/field_options.pb.h"
+#include "Client/global_extensions/method_options.pb.h"
+#include "Client/global_extensions/service_options.pb.h"
 
 #include "ServiceBase.h"
 #include "Debugging/Errors.h"

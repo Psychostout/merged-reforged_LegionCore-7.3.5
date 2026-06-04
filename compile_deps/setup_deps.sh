@@ -11,8 +11,8 @@
 #   --skip-boost
 #   --skip-openssl   (default on Linux if system libssl >= 3.0 is found)
 #   --skip-mariadb
-#   --legacy-boost   use the classic boost_1_85_0.tar.bz2 + b2 build
-#                    (default = use the smaller cmake-friendly modular archive)
+#   --legacy-boost   use the classic boost_1_83_0.tar.bz2 + b2 build
+#                    (default = use the smaller CMake-friendly GitHub archive)
 # ------------------------------------------------------------------------------
 set -euo pipefail
 
@@ -46,18 +46,18 @@ if [[ $SKIP_OPENSSL -eq 0 ]] && command -v pkg-config >/dev/null 2>&1; then
 fi
 
 # ----- Manifest (must match compile_deps/DEPENDENCIES.md) ----------------------
-BOOST_VERSION="1.85.0"
-# Modular cmake-friendly archive (default — smaller download, faster build)
-BOOST_MODULAR_FILE="boost-1.85.0-cmake.tar.xz"
+BOOST_VERSION="1.83.0"
+# CMake-friendly GitHub archive (default — smaller download, faster build)
+BOOST_MODULAR_FILE="boost-1.83.0.tar.xz"
 BOOST_MODULAR_URL="https://github.com/boostorg/boost/releases/download/boost-${BOOST_VERSION}/${BOOST_MODULAR_FILE}"
-BOOST_MODULAR_SHA256="0a9cc56ceae46986f5f4d43fe0311d90cf6d2fa9028258a95cab49ffdacf92ad"
-BOOST_MODULAR_DIR="boost-1.85.0"
+BOOST_MODULAR_SHA256="c5a0688e1f0c05f354bbd0b32244d36085d9ffc9f932e8a18983a9908096f614"
+BOOST_MODULAR_DIR="boost-1.83.0"
 # Legacy non-modular archive
-BOOST_LEGACY_UNDERSCORED="boost_1_85_0"
+BOOST_LEGACY_UNDERSCORED="boost_1_83_0"
 BOOST_LEGACY_FILE="${BOOST_LEGACY_UNDERSCORED}.tar.bz2"
 BOOST_LEGACY_URL_PRIMARY="https://archives.boost.io/release/${BOOST_VERSION}/source/${BOOST_LEGACY_FILE}"
 BOOST_LEGACY_URL_FALLBACK="https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_LEGACY_FILE}"
-BOOST_LEGACY_SHA256="7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617"
+BOOST_LEGACY_SHA256="79e6d3f986444e5a80afbeccdaf2d1c1cf964baa8d766d20859d653a16c39848"
 
 OPENSSL_VERSION="3.5.0"
 OPENSSL_FILE="openssl-${OPENSSL_VERSION}.tar.gz"
@@ -118,11 +118,11 @@ else
   if [[ -f "$BOOST_INSTALL/include/boost/version.hpp" ]] && [[ $FORCE -eq 0 ]]; then
     echo "Boost: already installed at $BOOST_INSTALL"
   elif [[ $LEGACY_BOOST -eq 0 ]]; then
-    # ---- Default: modular cmake-friendly archive ----
-    echo "===== Boost $BOOST_VERSION (modular cmake archive) ====="
+    # ---- Default: CMake-friendly GitHub archive ----
+    echo "===== Boost $BOOST_VERSION (CMake-friendly archive) ====="
     BOOST_SRC="$DEPS_DIR/boost/$BOOST_MODULAR_DIR"
     fetch_verified "$BOOST_MODULAR_URL" "" \
-                   "$DOWNLOADS_DIR/$BOOST_MODULAR_FILE" "$BOOST_MODULAR_SHA256" "Boost $BOOST_VERSION (modular)"
+                   "$DOWNLOADS_DIR/$BOOST_MODULAR_FILE" "$BOOST_MODULAR_SHA256" "Boost $BOOST_VERSION (CMake-friendly archive)"
     if [[ ! -d "$BOOST_SRC" ]]; then
       echo "  [extract] $BOOST_MODULAR_FILE -> $DEPS_DIR/boost/"
       mkdir -p "$DEPS_DIR/boost"

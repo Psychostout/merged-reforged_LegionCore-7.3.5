@@ -1,12 +1,19 @@
 {
   "version": 3,
-  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
   "configurePresets": [
     {
       "name": "windows-base",
       "hidden": true,
       "generator": "Visual Studio 17 2022",
-      "architecture": { "value": "x64", "strategy": "set" },
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
         "TOOLS": "1",
@@ -14,11 +21,6 @@
         "USE_COREPCH": "ON",
         "USE_SCRIPTPCH": "ON",
         "SCRIPTS": "static"
-      },
-      "environment": {
-        "BOOST_ROOT": "C:/local/boost_1_85_0",
-        "MYSQL_ROOT_DIR": "C:/Program Files/MariaDB 10.6",
-        "OPENSSL_ROOT_DIR": "C:/Program Files/OpenSSL-Win64"
       },
       "condition": {
         "type": "equals",
@@ -29,15 +31,19 @@
     {
       "name": "windows-msvc-release",
       "displayName": "Windows MSVC (Release, x64)",
-      "description": "Visual Studio 2022, x64, Release. Boost 1.85+, MariaDB 10.6+, OpenSSL 3.x.",
+      "description": "Visual Studio 2022, x64, Release. Boost 1.83, MariaDB 10.6+, OpenSSL 3.x.",
       "inherits": "windows-base",
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo" }
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
     },
     {
       "name": "windows-msvc-debug",
       "displayName": "Windows MSVC (Debug, x64)",
       "inherits": "windows-base",
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
     },
     {
       "name": "linux-gcc-release",

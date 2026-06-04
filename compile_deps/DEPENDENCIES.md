@@ -34,11 +34,11 @@ them under `compile_deps/`.
 
 | Platform | Version | File | SHA-256 | Source |
 |---|---|---|---|---|
-| Cross-platform source (CMake-friendly modular form) | **1.85.0** | `boost-1.85.0-cmake.tar.xz` | `0a9cc56ceae46986f5f4d43fe0311d90cf6d2fa9028258a95cab49ffdacf92ad` | <https://github.com/boostorg/boost/releases/download/boost-1.85.0/boost-1.85.0-cmake.tar.xz> |
-| Windows x64 (prebuilt MSVC 14.3 / VS 2022) | 1.85.0 | `boost_1_85_0-msvc-14.3-64.exe` | `e63a2da99a36cce1fad28e15dd5f9d2bb9bf6f55ee8e0c543cfc15f0f5e2dc06` | <https://sourceforge.net/projects/boost/files/boost-binaries/1.85.0/> |
-| Linux source (legacy non-modular) | 1.85.0 | `boost_1_85_0.tar.bz2` | `7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617` | <https://archives.boost.io/release/1.85.0/source/> |
+| Cross-platform source (CMake-friendly archive) | **1.83.0** | `boost-1.83.0.tar.xz` | `c5a0688e1f0c05f354bbd0b32244d36085d9ffc9f932e8a18983a9908096f614` | <https://github.com/boostorg/boost/releases/download/boost-1.83.0/boost-1.83.0.tar.xz> |
+| Windows x64 (prebuilt MSVC 14.3 / VS 2022) | 1.83.0 | `boost_1_83_0-msvc-14.3-64.exe` | `67975ce4a8799f17728ddba8e64e9b450a6bda7762643e829a96ccbbd1ca17d2` | <https://sourceforge.net/projects/boost/files/boost-binaries/1.83.0/> |
+| Linux source (legacy non-modular) | 1.83.0 | `boost_1_83_0.tar.bz2` | `79e6d3f986444e5a80afbeccdaf2d1c1cf964baa8d766d20859d653a16c39848` | <https://archives.boost.io/release/1.83.0/source/> |
 
-> Linux setup builds Boost from the **CMake-friendly modular tarball** by
+> Linux setup builds Boost from the **CMake-friendly GitHub tarball** by
 > default (smaller download, faster build); pass `--legacy-boost` to
 > setup_deps.sh to use the classic `.tar.bz2` + `b2` flow.
 
@@ -60,11 +60,11 @@ them under `compile_deps/`.
 
 ## Why these specific versions
 
-- **Boost 1.85** — matches the floor declared in `dep/boost/CMakeLists.txt`.
-  Boost 1.85 / 1.86 / 1.87 / 1.88 are all compile-compatible with this
-  codebase (1.86+ moved `boost/process/*.hpp` → `boost/process/v1/*.hpp`;
-  see `src/common/Utilities/StartProcess.cpp` for the
-  `BOOST_VERSION >= 108600` branch that handles this).
+- **Boost 1.83** — matches the floor declared in `dep/boost/CMakeLists.txt`
+  and is the version verified to build `bnetserver`. Boost 1.83 still ships
+  the legacy Boost.Asio `boost/asio/io_service.hpp` header used by the current
+  bnetserver REST code. Boost 1.85+ may require a small Asio include
+  modernization before it can be used reliably.
 - **OpenSSL 3.5.0 LTS** — current LTS, ships with PQC algorithms
   (ML-KEM, ML-DSA, SLH-DSA), QUIC, integrity-only TLS suites. Drops support
   for OpenSSL 1.1 (already EOL).

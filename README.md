@@ -2,10 +2,10 @@
 
 !!!!IMPORTANT REMINDER: CURRENTLY UNDER DEVOLEPMENT BY A COMPLETE NOOB WITH A INTERNET CONNECTION!!!!
 
-[![Status: build-system clean • bnetserver wip](https://img.shields.io/badge/build--system-clean-green)](#build-status)
+[![Status: bnetserver builds](https://img.shields.io/badge/bnetserver-builds-green)](#build-status)
 [![CMake](https://img.shields.io/badge/CMake-3.18…4.3.2-blue)](#requirements)
 [![C++](https://img.shields.io/badge/C%2B%2B-20-blue)](#requirements)
-[![Boost](https://img.shields.io/badge/Boost-1.85+-orange)](#requirements)
+[![Boost](https://img.shields.io/badge/Boost-1.83-orange)](#requirements)
 [![OpenSSL](https://img.shields.io/badge/OpenSSL-3.5%20LTS-orange)](#requirements)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.6.3+-orange)](#requirements)
 [![Client](https://img.shields.io/badge/Legion-7.3.5%20%2826972%29-purple)](#what-this-is)
@@ -35,17 +35,38 @@ real Legion 7.3.5 WoW client.
 |---|---|
 | **Merge** | 64 commits from `Psychostout/LegionCore-Reforged` integrated verbatim on top of `The-Legion-Preservation-Project/LegionCore-7.3.5`. Zero text conflicts (Reforged was branched from the exact current tip of upstream main). |
 | **CMake** | `cmake_minimum_required(VERSION 3.18…4.3.2)` — supports the brand-new CMake 4.3 series with all modern policies on, while keeping the existing 3.18 floor. |
-| **Boost** | Floor raised to **1.85** on both Linux and Windows. Compat fix in `StartProcess.cpp` for Boost 1.86+ where `boost/process/*.hpp` headers moved to `boost/process/v1/*.hpp`. |
+| **Boost** | Floor set to **1.83** on both Linux and Windows. This is the verified version for the current `bnetserver` build path; `StartProcess.cpp` still contains compatibility for Boost 1.86+ `boost/process/v1/*` headers. |
 | **OpenSSL** | Floor raised to **3.5 LTS** (current Long-Term-Support series, supported through April 2030). Built-source path uses `no-tests no-docs no-shared`. |
 | **MariaDB** | Floor raised to **10.6.3** (LTS). `FindMySQL.cmake` now actually *probes* the connector version and warns at configure time if you're below it. Windows registry hints expanded to 10.6 / 10.11. |
 | **Windows toolchain** | MSVC floor raised to 19.30 (VS 2022 v143 — required by the project's C++20). Added `/Zc:__cplusplus /Zc:preprocessor /utf-8 /EHsc /permissive-`. `_WIN32_WINNT` bumped from `0x0601` (Win 7, EOL) to `0x0A00` (Win 10 1809+). |
 | **`compile_deps/` folder** | Vendored MariaDB Connector/C 3.4.8 source; `setup_deps.{ps1,sh}` scripts that download + SHA-256-verify Boost & OpenSSL from official sources; CMake glue that auto-points `BOOST_ROOT`/`MYSQL_ROOT_DIR`/`OPENSSL_ROOT_DIR` into the folder. **Zero-env-var build flow.** |
 | **`CMakePresets.json`** | Ready-made `windows-msvc-release`, `windows-msvc-debug`, `linux-gcc-release` presets so contributors don't have to memorise flags. |
 | **SoloCraft restored** | `src/server/scripts/Custom/Solocraft.cpp` + `custom_script_loader.cpp` byte-restored from upstream; ships disabled (`Solocraft.Enable = 0`); 244 config keys documented in `worldserver.conf.dist`. |
-| **Config in English** | `worldserver.conf.dist` translated French → English while keeping every one of the **474 setting lines byte-identical** (settings live on non-comment lines so they're never touched). |
-| **`BUILD_WINDOWS.md`** | Step-by-step Windows build guide with VS 2022 setup, troubleshooting for the 7 most common Windows-only build failures. |
+| **Config in English** | `worldserver.conf.dist` translated French → English; the current live config contains **479 setting lines** and settings live on non-comment lines so they are easy to preserve during comment cleanup. |
+| **`docs/BUILD_WINDOWS.md`** | Step-by-step Windows build guide with VS 2022 setup, troubleshooting for the 7 most common Windows-only build failures. |
 
-See `CHANGELOG.txt` for the full per-commit list with rationales.
+See the user documentation list below for setup, Windows builds, dependency setup, and portable server layout.
+
+---
+
+
+## User documentation
+
+Start here if you are building or running the server:
+
+| Document | Purpose |
+|---|---|
+| [`docs/setup_guide.md`](docs/setup_guide.md) | Short step-by-step setup index. |
+| [`docs/BUILD_WINDOWS.md`](docs/BUILD_WINDOWS.md) | Windows / Visual Studio 2022 build guide. |
+| [`docs/DEPENDENCY_SETUP.md`](docs/DEPENDENCY_SETUP.md) | Required tools/dependencies and where `compile_deps` places them. |
+| [`docs/PORTABLE_SERVER_SETUP.md`](docs/PORTABLE_SERVER_SETUP.md) | Standalone portable server folder, MariaDB, configs, SQL import, startup. |
+| [`compile_deps/README.md`](compile_deps/README.md) | How to fetch/build third-party dependencies. |
+| [`compile_deps/DEPENDENCIES.md`](compile_deps/DEPENDENCIES.md) | Dependency versions, URLs, and SHA-256 checksums. |
+| [`docs/README.md`](docs/README.md) | Documentation index. |
+
+Maintainer-only development notes, old transcript summaries, translation work,
+and build logs are stored separately under `Dev_referance/` and are not needed
+for normal setup.
 
 ---
 
@@ -59,7 +80,7 @@ git clone <your fork URL> LegionCore && cd LegionCore
 
 # 2. System prereqs (Debian 13 example)
 sudo apt-get install -y build-essential cmake git ninja-build \
-    libboost-all-dev libboost-charconv1.88-dev \
+    libboost1.83-all-dev \
     libssl-dev libmariadb-dev zlib1g-dev libbz2-dev libreadline-dev
 
 # (Or skip system Boost/OpenSSL/MariaDB and let compile_deps/setup_deps.sh fetch them)
@@ -84,8 +105,9 @@ cmake --preset windows-msvc-release
 cmake --build --preset windows-msvc-release
 ```
 
-See [`BUILD_WINDOWS.md`](BUILD_WINDOWS.md) for the full Windows guide including
-required Visual Studio components, common gotchas, and DLL deployment.
+See [`docs/BUILD_WINDOWS.md`](docs/BUILD_WINDOWS.md) for the full Windows build guide.
+After compiling, see [`docs/PORTABLE_SERVER_SETUP.md`](docs/PORTABLE_SERVER_SETUP.md) for
+standalone folder layout, configs, MariaDB setup, SQL imports, and startup order.
 
 ---
 
@@ -99,8 +121,8 @@ required Visual Studio components, common gotchas, and DLL deployment.
 | **Clang** (Linux/macOS) | 7 | – |
 | **MSVC** (Windows) | 19.30 (VS 2022 v143) | – |
 | **Windows** | 10 1809 (build 17763) | – |
-| **Boost** | 1.85 | 1.88 |
-| **OpenSSL** | 3.0 (3.5 LTS recommended) | 3.5.5 |
+| **Boost** | 1.83 | 1.83 |
+| **OpenSSL** | 3.0 (3.5 LTS recommended) | 3.5.6 |
 | **MariaDB** | 10.6.3 LTS | 11.8.6 |
 | **MySQL** alternative | 8.0+ | – |
 | **ZLib** | any recent | 1.3.1 |
@@ -110,54 +132,70 @@ required Visual Studio components, common gotchas, and DLL deployment.
 
 ## Build status
 
-### What currently builds cleanly
+### Verified targeted build
 
-✅ `dep/*` — all vendored deps (CascLib, fmt, g3dlite, gsoap, protobuf, rapidjson,
-  recastnavigation, SFMT, utf8cpp, zlib, plus the boost/openssl/mysql/readline wrappers)
-✅ `common` (`libcommon.a` ~3.7 MB, 100+ source files)
-✅ `database` (`libdatabase.a`)
-✅ `proto` (`libproto.a` — Login + RealmList descriptors)
+✅ `bnetserver` builds successfully in the Linux test environment when using
+**Boost 1.83** and a targeted build:
 
-Verified end-to-end with **CMake 4.3.2 + GCC 14.2.0 + Boost 1.88 + OpenSSL 3.5.5 +
-MariaDB 11.8.6** on Debian 13.
+```bash
+cmake -S . -B build/bnetserver-boost183 -G Ninja \
+      -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+      -DTOOLS=0 \
+      -DSCRIPTS=none
+cmake --build build/bnetserver-boost183 --target bnetserver -- -j1
+```
 
-### What does NOT yet build
+The successful test produced:
 
-❌ `shared` — blocked on missing BNet proto descriptors (see below)
-❌ `scripts` / `bnetserver` / `worldserver` — transitively blocked on `shared`
+```text
+build/bnetserver-boost183/src/server/bnetserver/bnetserver
+```
 
-### Known pre-existing limitation (BNet protos)
+The linked binary used Boost 1.83 libraries:
 
-The upstream `Psychostout/LegionCore-Reforged` fork is missing **13 generated
-Battle.net `.pb.h`/`.pb.cc` files** (account_service, authentication_service,
-challenge_service, channel_service, connection_service, friends_service,
-game_utilities_service, notification_types, presence_service,
-profanity_filter_config, report_service, resource_service, user_manager_service)
-along with their `.proto` source files. These are referenced by:
+```text
+libboost_filesystem.so.1.83.0
+libboost_program_options.so.1.83.0
+libboost_thread.so.1.83.0
+```
 
-  * `src/server/bnetserver/Services/AccountService.h`
-  * `src/server/bnetserver/Services/AuthenticationService.h`
-  * `src/server/bnetserver/Services/ConnectionService.h`
-  * `src/server/game/Services/WorldserverService.h`
-  * `src/server/game/Services/WorldserverServiceDispatcher.h`
-  * `src/server/shared/Realm/RealmList.cpp`
+### What currently builds cleanly in the targeted path
 
-So `shared` (and everything downstream) doesn't link. The most direct fix is to
-obtain the missing `.proto` sources from upstream TrinityCore master and add a
-`protobuf_generate` step to `src/server/proto/CMakeLists.txt`. That is **not in
-scope for this branch** — it's a clean-room re-implementation of a non-trivial
-piece of the BNet protocol stack.
+✅ `dep/*` required by `bnetserver`
+✅ `common`
+✅ `database`
+✅ `proto` including the committed BNet `Client/*.pb.{h,cc}` descriptors
+✅ `shared`
+✅ `bnetserver`
 
-Several mitigations have been applied to make sure the parts that *can* build
-do so cleanly:
+### Important Boost note
 
-  * `src/server/proto/PrecompiledHeaders/protoPCH.h` now only references the
-    two descriptors that exist (`Login.pb.h`, `RealmList.pb.h`).
-  * `src/server/proto/CMakeLists.txt` excludes the broken `Client/` subdirectory
-    from the proto build.
-  * `src/server/game/DataStores/DB2Stores.h` got a missing
-    `#include <unordered_set>` (was relying on a transitive include the PCH
-    happened to provide).
+Boost **1.83** is the supported floor for this branch because the current
+`bnetserver` REST code includes the legacy Boost.Asio header:
+
+```cpp
+#include <boost/asio/io_service.hpp>
+```
+
+Boost 1.83 provides that header. Boost 1.88 does not, which is why the earlier
+Boost 1.88 test failed before compiling `bnetserver`.
+
+### What is not yet verified
+
+⚠️ A full `worldserver` / all-scripts build has not been validated in this
+recovery pass. The successful test was intentionally limited to `bnetserver`.
+
+### BNet protobuf status
+
+The previously missing BNet generated protobuf files are now present under:
+
+```text
+src/server/proto/Client/
+```
+
+`src/server/proto/CMakeLists.txt` includes that directory in the `proto` target,
+and `src/server/proto/PrecompiledHeaders/protoPCH.h` references the committed
+service/type descriptors.
 
 ---
 
@@ -167,9 +205,13 @@ do so cleanly:
 LegionCore-7.3.5/
 ├── CMakeLists.txt              Top-level build (CMake 3.18…4.3.2)
 ├── CMakePresets.json           windows-msvc-release / debug, linux-gcc-release
-├── CHANGELOG.txt               Full history of merge + modernization commits
-├── BUILD_WINDOWS.md            Windows build guide
-├── README.md                   You are here
+├── README.md                   GitHub front page
+├── docs/                       Detailed project documentation
+│   ├── setup_guide.md          Short step-by-step index
+│   ├── BUILD_WINDOWS.md        Windows build guide
+│   ├── DEPENDENCY_SETUP.md      Dependency/toolchain setup guide
+│   └── PORTABLE_SERVER_SETUP.md Standalone server layout/deployment guide
+├── Dev_referance/              Maintainer-only references (not needed for normal setup)
 ├── cmake/                      Find* macros, compiler/platform settings
 ├── dep/                        Vendored 3rd-party dependencies (CascLib, fmt, …)
 ├── compile_deps/               Build-time dependency manager (see its own README.md)
@@ -210,7 +252,7 @@ LegionCore-7.3.5/
 
 Two config files (both English):
 
-* **`worldserver.conf.dist`** — 2,881 lines, 474 settings, every category from
+* **`worldserver.conf.dist`** — 2,881 lines, 479 settings, every category from
   game rules to network buffers to AHBot tuning. Copy to `worldserver.conf` and
   edit. Defaults are sensible Legion-blizzlike with some quality-of-life
   changes (talents free, world quests on, durability loss ≈ 0).
@@ -250,11 +292,7 @@ Patches are welcome. Please:
    end-to-end and report the result.
 5. Conform to the existing TrinityCore-style naming.
 
-The single most useful contribution right now would be **restoring the missing
-BNet protocol `.proto` files** from upstream TrinityCore master (see
-[Known limitation](#known-pre-existing-limitation-bnet-protos)) and wiring
-`protobuf_generate_cpp` into `src/server/proto/CMakeLists.txt`. That unblocks
-`shared` and the full server build.
+The most useful contribution right now would be validating and fixing the full `worldserver` / scripts build after the now-verified `bnetserver` target.
 
 ---
 

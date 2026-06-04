@@ -1,6 +1,0 @@
-#ifndef DEF_TEMPLEOFJADESERPENT_H
-#define DEF_TEMPLEOFJADESERPENT_H
-
-#define DataHeader "TJS"
-
-#endif

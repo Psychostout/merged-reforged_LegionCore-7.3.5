@@ -12,20 +12,13 @@ CollectSourceFiles(
   ${CMAKE_CURRENT_SOURCE_DIR}
   PRIVATE_SOURCES
   # Exclude
-  ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders
-  # Exclude the BNet Client/ proto descriptors. The upstream Reforged fork
-  # only committed 4 of the ~17 .pb.cc files this directory needs (it's
-  # missing rpc_types.pb.h, attribute_types.pb.h, account_service.pb.h, and
-  # 13 more service descriptors). We investigated backporting them from
-  # upstream TrinityCore master but TC master's proto tree has diverged
-  # significantly: it's restructured into api/{client,common}/v1/ subdirs
-  # with hundreds of files that LegionCore 7.3.5 was never designed for.
-  # The bnetserver and game/Services classes that need the full BNet
-  # descriptor set need those regenerated specifically for Legion 7.3.5
-  # before bnetserver can fully link. See README.md "Known limitation".
-  # The remaining proto sources (Login.pb.cc, RealmList.pb.cc) ARE
-  # complete and self-contained, so libproto.a still builds usefully.
-  ${CMAKE_CURRENT_SOURCE_DIR}/Client)
+  ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders)
+
+# The Legion-era BNet Client protobuf descriptors are present in
+# src/server/proto/Client/ as pre-generated .pb.h/.pb.cc files and are included
+# in PRIVATE_SOURCES by CollectSourceFiles above. Do not exclude Client/ here:
+# bnetserver/shared need account_service, authentication_service,
+# connection_service, game_utilities_service, rpc_types, attribute_types, etc.
 
 if (USE_COREPCH)
   set(PRIVATE_PCH_HEADER PrecompiledHeaders/protoPCH.h)
@@ -41,9 +34,7 @@ CollectIncludeDirectories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   PUBLIC_INCLUDES
   # Exclude
-  ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders
-  ${CMAKE_CURRENT_SOURCE_DIR}/Client/api
-  ${CMAKE_CURRENT_SOURCE_DIR}/Client/global_extensions)
+  ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders)
 
 target_include_directories(proto
   PUBLIC

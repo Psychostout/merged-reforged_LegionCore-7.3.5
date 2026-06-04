@@ -36,10 +36,10 @@ endfunction()
 # Boost
 # ------------------------------------------------------------------------------
 # Detection layout (the setup scripts produce one of these):
-#   compile_deps/boost/boost_1_85_0/                   <- Windows prebuilt root
+#   compile_deps/boost/boost_1_83_0/                   <- Windows prebuilt root
 #   compile_deps/boost/install/                        <- Linux from-source install prefix
 set(_lc_boost_candidates
-  "${LEGIONCORE_DEPS_DIR}/boost/boost_1_85_0"
+  "${LEGIONCORE_DEPS_DIR}/boost/boost_1_83_0"
   "${LEGIONCORE_DEPS_DIR}/boost/install"
   "${LEGIONCORE_DEPS_DIR}/boost")  # last-ditch fallback
 foreach(_p IN LISTS _lc_boost_candidates)
