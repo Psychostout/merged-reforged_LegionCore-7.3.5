@@ -1366,3 +1366,945 @@ Result:
 ================================================================================
   End of Step 22 duplicate-tree removal entry
 ================================================================================
+
+--------------------------------------------------------------------------------
+ 26. NEW SESSION — STEP 0 — CLONE REPOSITORY — 2026-06-04
+--------------------------------------------------------------------------------
+
+Scope:
+  Repository clone only. No changes made. No build run.
+
+Action:
+  [✓] Cloned https://github.com/Psychostout/merged-reforged_LegionCore-7.3.5
+      into /home/user/merged-reforged_LegionCore-7.3.5.
+  [✓] Clone succeeded. Repository is intact.
+
+================================================================================
+  End of new session Step 0 entry
+================================================================================
+
+--------------------------------------------------------------------------------
+ 27. NEW SESSION — STEP 2 — READ & SUMMARIZE DEV DOCS — 2026-06-04
+--------------------------------------------------------------------------------
+
+Scope:
+  Read-only inspection. No files changed. No build run.
+
+Action:
+  [✓] Read Dev_referance/LEGION_README.txt (751 lines, 22,411 bytes).
+  [✓] Read Dev_referance/CHANGELOG.txt (1,369 lines, 68,248 bytes).
+  [✓] Produced a comprehensive summary report for the operator covering:
+        - Project identity and merge history
+        - All 64 Reforged commits and what they added
+        - All modernization work done on top of the merge
+        - Current build status (bnetserver verified, worldserver not yet)
+        - Dependency version matrix
+        - Known issues and open items
+        - Documentation structure
+  [✓] No files were modified in this step.
+
+================================================================================
+  End of new session Step 2 entry
+================================================================================
+
+--------------------------------------------------------------------------------
+ 28. NEW SESSION — DOCUMENTATION POLICY + CRITICAL REMINDER — 2026-06-04
+--------------------------------------------------------------------------------
+
+Scope:
+  Documentation policy enforcement. No build run.
+
+Operator directive:
+  AFTER EVERY CHANGE MADE TO THIS PROJECT:
+    1. Dev_referance/CHANGELOG.txt MUST be updated with a record of every
+       change made.
+    2. Dev_referance/LEGION_README.txt MUST be updated with a summary of
+       everything discussed and done.
+
+Changes made:
+  [✓] Dev_referance/LEGION_README.txt:
+      - Added a critical reminder block at the very top of the file stating
+        the mandatory update policy for CHANGELOG.txt and LEGION_README.txt.
+      - Added Section 23 "NEW SESSION" timeline entry documenting Step 0
+        (clone), Step 2 (read & summarize), and this documentation policy step.
+
+  [✓] Dev_referance/CHANGELOG.txt:
+      - Added entry 26 for Step 0 (clone).
+      - Added entry 27 for Step 2 (read & summarize).
+      - Added entry 28 (this entry) for the documentation policy directive.
+
+No build was run.
+
+================================================================================
+  End of documentation policy entry
+================================================================================
+
+--------------------------------------------------------------------------------
+ 29. NEW SESSION — STEP 3 — STATIC SCRIPT TESTING — 2026-06-04
+--------------------------------------------------------------------------------
+
+Scope:
+  Static analysis and testing of all scripts WITHOUT building. No build was run.
+  No files were changed (read-only inspection).
+
+Script inventory:
+  [✓] Total script .cpp files: 1,131
+  [✓] Total script .h files: 166
+  [✓] Total script directories: 219
+  [✓] Total script source files: 1,297
+  [✓] 17 script module loaders found, all with correct Add*Scripts() functions.
+
+CMake collection mechanism:
+  [✓] CollectSourceFiles() is recursive — no per-subdirectory CMakeLists.txt
+      needed. All 219 script directories are automatically collected.
+
+AddSC_ registration analysis (1,110 unique defined, 1,106 called):
+  [✓] Zero orphan calls (called but not defined).
+  [!] 4 scripts are DEFINED but NOT REGISTERED in any loader:
+
+      1. AddSC_battlepay_commandscript
+         File: src/server/scripts/Commands/cs_battlepay.cpp
+         Issue: Missing from cs_script_loader.cpp.
+         Risk: BattlePay GM commands won't load at runtime.
+
+      2. AddSC_bc_teleport
+         File: src/server/scripts/EasternKingdoms/BlackrockCaverns/blackrock_caverns_teleport.cpp
+         Issue: Missing from eastern_kingdoms_script_loader.cpp.
+         Risk: Blackrock Caverns teleport script won't load.
+
+      3. AddSC_coren_direbrew
+         File: src/server/scripts/EasternKingdoms/MoltenCore/boss_coren_direbrew.cpp
+         Issue: Missing from eastern_kingdoms_script_loader.cpp.
+         Risk: Coren Direbrew (Brewfest boss) script won't load.
+
+      4. AddSC_demon_invasion_creatures
+         File: src/server/scripts/Legion/DemonInvasionPrepatch_creatures.cpp
+         Issue: NOT a real problem. This is called internally by
+                AddSC_demon_invasion_prepatch() in DemonInvasionPrepatch.cpp.
+                It is a chained internal registration, not a missing loader entry.
+
+Include/header verification:
+  [✓] 326 unique quoted #include directives found across all script files.
+  [✓] ALL 326 resolve to existing files in src/ or dep/ trees.
+  [✓] Zero missing headers detected.
+
+Brace balance verification:
+  [✓] All 1,297 script files checked for brace balance.
+  [✓] 2 initial false positives (braces in comments/strings):
+      - boss_kiljaeden.cpp: balanced after stripping comments.
+      - boss_sha_of_fear.cpp: balanced after stripping comments/strings
+        (verified with Python AST-like parser).
+  [✓] Zero real brace mismatches.
+
+Empty file check:
+  [!] 2 empty .cpp files found:
+      - src/server/scripts/Kalimdor/CavernsOfTime/WellofEternity/boss_mannoroth.cpp
+      - src/server/scripts/Kalimdor/CavernsOfTime/WellofEternity/boss_varothen.cpp
+      These are placeholder/stub files. They won't cause build errors but the
+      bosses will have no scripted behavior.
+
+Line ending check:
+  [✓] Zero files with CRLF line endings. All scripts use Unix LF.
+
+SQL script verification:
+  [✓] 180 .sql files checked across sql/ tree.
+  [!] 1 truncated SQL file found:
+      - sql/custom/locales_frFR/creature_titles_frFR.sql
+        Last line is cut mid-string: WHEN 'Master of Tushui' THEN '
+        This file will error if imported into MariaDB as-is.
+  [i] 2 SQL files end with inline comments (valid SQL, not an error):
+      - sql/updates/world/2024_12_11_01_auchenai_crypts_trash_ai.sql
+      - sql/updates/world/2026_03_07_07_phase_definitions_zone7025_remove.sql
+        (active SQL is DELETE followed by a commented-out INSERT block)
+  [i] 2 SQL files end with data lines without trailing semicolons (valid,
+      as the semicolon is on the last VALUES line):
+      - sql/updates/world/demon_invasion_creatures.sql
+      - sql/updates/world/rukhmar_waypoint_path.sql
+
+SoloCraft verification:
+  [✓] Solocraft.cpp: 708 lines, defines AddSC_solocraft().
+  [✓] custom_script_loader.cpp: correctly calls AddSC_solocraft().
+
+Script module registration summary (AddSC_ count per module):
+  BattlePay:        2
+  BrawlersGuild:   16
+  Commands:        70
+  Custom:           2
+  Draenor:        116
+  EasternKingdoms: 422
+  Kalimdor:       296
+  Legion:         310
+  Maelstrom:       16
+  Northrend:      326
+  OutdoorPvP:      26
+  Outland:        174
+  Pandaria:       186
+  Scenario:       172
+  Spells:          34
+  World:           44
+  TOTAL:        2,212 registrations across 17 modules
+
+Actionable findings (3 real issues, in priority order):
+  1. [MEDIUM] 3 unregistered scripts should be added to their loaders:
+     - AddSC_battlepay_commandscript -> cs_script_loader.cpp
+     - AddSC_bc_teleport -> eastern_kingdoms_script_loader.cpp
+     - AddSC_coren_direbrew -> eastern_kingdoms_script_loader.cpp
+  2. [LOW] 1 truncated SQL file needs repair:
+     - sql/custom/locales_frFR/creature_titles_frFR.sql
+  3. [INFO] 2 empty placeholder scripts exist (boss_mannoroth, boss_varothen)
+     — not a bug, just unimplemented content.
+
+No files were changed. No build was run.
+
+================================================================================
+  End of Step 3 static script testing entry
+================================================================================
+
+--------------------------------------------------------------------------------
+ 30. NEW SESSION — STEP 4 — FIX 3 UNREGISTERED SCRIPTS — 2026-06-04
+--------------------------------------------------------------------------------
+
+Scope:
+  Script loader registration fixes only. No build was run.
+
+Operator instruction:
+  Fix the 3 unregistered scripts found in Step 3, only if 100% safe.
+
+Changes made:
+
+  [✓] src/server/scripts/Commands/cs_script_loader.cpp
+      Added forward declaration and call for AddSC_battlepay_commandscript().
+      Placed alphabetically between AddSC_ban_commandscript and
+      AddSC_bf_commandscript, matching the existing file convention.
+      Commands loader now has 72 AddSC_ registrations (was 70).
+
+  [✓] src/server/scripts/EasternKingdoms/eastern_kingdoms_script_loader.cpp
+      Added forward declaration and call for AddSC_bc_teleport().
+      Placed in the Blackrock Caverns section after AddSC_instance_blackrock_caverns,
+      matching the existing grouping convention.
+
+      Added forward declaration and call for AddSC_coren_direbrew().
+      Placed at the top of the Molten Core section with a "Brewfest" comment,
+      matching the existing grouping convention.
+      EasternKingdoms loader now has 426 AddSC_ registrations (was 422).
+
+      NOTE: Initial attempt incorrectly used AddSC_boss_coren_direbrew() (with
+      boss_ prefix), but the actual function defined in boss_coren_direbrew.cpp
+      is AddSC_coren_direbrew() (without boss_ prefix). Caught and corrected
+      during verification.
+
+Verification after fixes:
+  [✓] Re-ran the full AddSC_ mismatch analysis.
+  [✓] Defined: 1,110 unique AddSC_ functions.
+  [✓] Called: 1,109 unique AddSC_ functions in loaders.
+  [✓] Only remaining unregistered: AddSC_demon_invasion_creatures (false positive —
+      called internally by AddSC_demon_invasion_prepatch, not a missing registration).
+  [✓] Zero orphan calls (called but not defined).
+  [✓] Brace balance verified on both edited files: OK.
+  [✓] No other files were changed.
+
+No build was run.
+
+================================================================================
+  End of Step 4 script loader fix entry
+================================================================================
+
+--------------------------------------------------------------------------------
+ 31. NEW SESSION — STEP 4 PART 3 — COMPREHENSIVE SCRIPT AUDIT — 2026-06-04
+--------------------------------------------------------------------------------
+
+Scope:
+  Read-only audit of ALL scripts. Cross-referenced against Wowpedia boss lists.
+  No files changed. No build run.
+
+Confirmed: boss_mannoroth.cpp and boss_varothen.cpp are EMPTY (0 bytes).
+
+CATEGORY 1 — COMPLETELY EMPTY FILES (0 bytes):
+  [EMPTY] src/server/scripts/Kalimdor/CavernsOfTime/WellofEternity/boss_mannoroth.cpp
+  [EMPTY] src/server/scripts/Kalimdor/CavernsOfTime/WellofEternity/boss_varothen.cpp
+
+CATEGORY 2 — STUB SCRIPTS (AddSC_ with empty body, registers nothing):
+  These files compile but register zero script objects at runtime.
+
+  Instance/Raid stubs:
+    [STUB] Northrend/IcecrownCitadel/boss_gunship_battle.cpp (21 lines)
+    [STUB] EasternKingdoms/SunwellPlateau/sunwell_plateau.cpp (67 lines)
+
+  Zone stubs (empty world zone scripts):
+    [STUB] Draenor/zone_shadowmoon_valley.cpp
+    [STUB] EasternKingdoms/zone_ironforge.cpp
+    [STUB] EasternKingdoms/zone_loch_modan.cpp
+    [STUB] EasternKingdoms/zone_silverpine_forest.cpp
+    [STUB] EasternKingdoms/zone_swamp_of_sorrows.cpp
+    [STUB] Kalimdor/zone_azshara.cpp
+    [STUB] Kalimdor/zone_darkshore.cpp
+    [STUB] Kalimdor/zone_felwood.cpp
+    [STUB] Kalimdor/zone_feralas.cpp
+    [STUB] Kalimdor/zone_orgrimmar.cpp
+    [STUB] Kalimdor/zone_stonetalon_mountains.cpp
+    [STUB] Kalimdor/zone_thousand_needles.cpp
+    [STUB] Kalimdor/zone_ungoro_crater.cpp
+
+  Micro-Holiday stub:
+    [STUB] Legion/MicroHolidays/HatchingOfTheHippogryphs.cpp
+
+  OutdoorPvP stub:
+    [STUB] OutdoorPvP/Ashran/AshranAreaTrigger.cpp
+
+  Spell stub:
+    [STUB] Spells/spell_mastery.cpp
+
+  Scenario stubs (14 MoP scenarios with only placeholder files):
+    [STUB] Scenario/ABrewingStorm/a_brewing_storm.cpp
+    [STUB] Scenario/ALittlePatience/a_little_patience.cpp
+    [STUB] Scenario/AssoultOnZanvess/assault_on_zanvess.cpp
+    [STUB] Scenario/BattleOnTheHighSeas/battle_on_the_high_seas.cpp
+    [STUB] Scenario/BloodInTheSnow/blood_in_the_snow.cpp
+    [STUB] Scenario/BrewmoonFestival/brewmoon_festival.cpp
+    [STUB] Scenario/CelestialTournament/celestial_tournament.cpp
+    [STUB] Scenario/CryptOfForgottenKings/crypt_of_forgotten_kings.cpp
+    [STUB] Scenario/DaggerInTheDark/dagger_in_the_dark.cpp
+    [STUB] Scenario/DarkHeartOfPandaria/dark_heart_of_pandaria.cpp
+    [STUB] Scenario/DominationPoint/domination_point.cpp
+    [STUB] Scenario/FallofShanBu/fall_of_shan_bu.cpp
+    [STUB] Scenario/GreenstoneVillage/greenstone_village.cpp
+    [STUB] Scenario/LionsLanding/lions_landing.cpp
+    [STUB] Scenario/ProvingGrounds/proving_grounds.cpp
+    [STUB] Scenario/TheSecretsOfRagefire/the_secrets_of_ragefire.cpp
+    [STUB] Scenario/UngaIngoo/unga_ingoo.cpp
+
+CATEGORY 3 — RAIDS WITH instance_ ONLY, NO BOSS SCRIPTS:
+  [MISSING ALL BOSSES] Draenor/BlackrockFoundry — 0/10 boss scripts
+    Only has: instance_blackrock_foundry.cpp + blackrock_foundry.h
+    Missing: Gruul, Oregorger, Beastlord Darmac, Hans'gar & Franzok,
+    Flamebender Ka'graz, Kromog, Operator Thogar, Iron Maidens,
+    Blast Furnace, Blackhand
+
+  [MISSING ALL BOSSES] Draenor/HellfireCitadel — 0/13 boss scripts
+    Only has: instance_hellfire_citadel.cpp + hellfire_citadel.h
+    Missing: Hellfire Assault, Iron Reaver, Kormrok, Kilrogg Deadeye,
+    Hellfire High Council, Gorefiend, Shadow-Lord Iskar, Socrethar,
+    Fel Lord Zakuun, Xhul'horac, Tyrant Velhari, Mannoroth, Archimonde
+
+CATEGORY 4 — PARTIAL/INCOMPLETE BOSS SCRIPTS:
+  [PARTIAL] Well of Eternity — boss_queen_azshara.cpp
+    Has only 1 spell script (drain essence aura). No actual boss AI,
+    no CreatureScript, no engage/phase/ability logic.
+
+CATEGORY 5 — VERIFIED COMPLETE (all bosses present with real AI):
+  Legion Raids:
+    [✓] Emerald Nightmare: 7/7 bosses
+    [✓] Trial of Valor: 3/3 bosses
+    [✓] The Nighthold: 10/10 bosses
+    [✓] Tomb of Sargeras: 9/9 bosses
+    [✓] Antorus: 11/11 bosses
+
+  Legion Dungeons:
+    [✓] All 13 Legion dungeons have complete boss coverage
+
+  Other verified raids:
+    [✓] Dragon Soul: 8/8 bosses
+    [✓] Firelands: 7/7 bosses
+    [✓] End Time: 5/5 bosses (including Murozond)
+    [✓] Hour of Twilight: 3/3 bosses
+    [✓] Highmaul: 7/7 bosses
+
+  Draenor Dungeons:
+    [✓] Auchindoun: 4 boss scripts
+    [✓] Bloodmaul Slag Mines: 4 boss scripts
+    [✓] Iron Docks: 4 boss scripts
+    [✓] Skyreach: 4 boss scripts
+    [✓] Shadowmoon Burial Grounds: 4 boss scripts
+    [✓] The Everbloom: 5 boss scripts
+    [✓] Upper Blackrock Spire: 5 boss scripts
+
+No files were changed. No build was run.
+
+================================================================================
+  End of Step 4 Part 3 comprehensive script audit entry
+================================================================================
+================================================================================
+  LegionCore-7.3.5 — MERGE & MODERNIZATION CHANGELOG
+================================================================================
+
+  Project   : LegionCore (WoW Legion private-server emulator, client build 26972)
+  Base      : github.com/The-Legion-Preservation-Project/LegionCore-7.3.5
+  Merged in : github.com/Psychostout/LegionCore-Reforged
+  Branch    : merged-reforged
+  Generated : 2026-06-02
+  Author    : Arena.ai Agent
+
+--------------------------------------------------------------------------------
+  1. IDENTITY & SCOPE
+--------------------------------------------------------------------------------
+
+This branch is a clean integration of "LegionCore-Reforged" on top of the
+canonical "LegionCore-7.3.5" preservation source, followed by a small,
+focused modernization of the build toolchain.
+
+  * CURRENT_EXPANSION   = EXPANSION_LEGION (6)        [src/server/game/Miscellaneous/SharedDefines.h]
+  * Default client build = 26972 (Legion 7.3.5 final retail)  [src/server/shared/Realm/RealmList.cpp:186]
+  * CMake project name  = LegionCore                  [CMakeLists.txt:18]
+  * Repo README         = "WOW Legion (Build 26972)"  [README.md]
+  * Extractor tools self-identify as
+       "Extractor Tools v1.0.1 - Legion 7.3.5 (build 26972)"
+    (mapextractor, vmap4extractor, vmap4assembler, mmaps_generator)
+
+Confirmed: this IS the correct merged Legion 7.3.5 source tree.
+
+--------------------------------------------------------------------------------
+  2. WHAT THE MERGE INVOLVED
+--------------------------------------------------------------------------------
+
+Reforged was branched from the *exact* current tip of LegionCore-7.3.5/main
+(commit fed58f7 "Update IntermediateValues.cpp (#252)") and was 64 commits
+ahead with 0 commits diverged.  Result:
+
+  * No textual conflicts.
+  * No history rewriting.
+  * A simple "git merge --no-ff" produces a tree that is byte-for-byte
+    identical to the tip of Reforged, while preserving 100% of both projects'
+    full git history.
+
+Numerical accounting:
+
+  Original LegionCore-7.3.5/main commits ...................  283
+  Reforged-unique commits merged in ........................   64
+  Modernization commits added on top by this work ..........    4
+                                                            ─────
+  Total commits on 'merged-reforged' branch ................  351
+
+  Files in tree at reforged/main ...........................  3,281
+  Files in tree at merged-reforged HEAD ....................  3,283
+                                                            ─────
+  Net change: +2 (CHANGELOG.txt and CMakePresets.json + BUILD_WINDOWS.md
+                  minus zero deletions; the 5 modified files keep the same
+                  paths but have new blob hashes from the modernization)
+
+--------------------------------------------------------------------------------
+  3. INTEGRITY VERIFICATION (run on the final state)
+--------------------------------------------------------------------------------
+
+  [✓] git fsck --full --strict : 0 errors, 0 dangling objects, 0 garbage
+  [✓] git status --porcelain   : empty (working tree clean)
+  [✓] All 283 original-main commits reachable from merged-reforged HEAD
+  [✓] All 64 Reforged-unique commits reachable from merged-reforged HEAD
+  [✓] Byte-for-byte diff of every file between reforged/main and
+      merged-reforged: exactly 5 files differ, ALL of which were
+      deliberately modified by the 3 modernization commits below.
+      The other 3,276 files have identical blob SHAs.
+  [✓] Tree hash check at the merge commit (13dde92): tree(merge) ==
+      tree(reforged/main) — every file landed exactly as Reforged had it.
+
+--------------------------------------------------------------------------------
+  4. THE 5 COMMITS ADDED ON TOP (Modernization)
+--------------------------------------------------------------------------------
+
+  13dde92  Merge LegionCore-Reforged into LegionCore-7.3.5
+           Brings in all 64 Reforged commits verbatim. No conflicts.
+
+  e099f66  CMake: support up to CMake 4.3.2
+           CMakeLists.txt: cmake_minimum_required(VERSION 3.18) -> 3.18...4.3.2
+           Uses the range form so the 3.18 floor is preserved AND modern CMake
+           policies are activated (silencing the new 4.x deprecation messages).
+           Verified by an actual configure with the official Kitware
+           cmake-4.3.2-linux-x86_64 binary: zero policy/deprecation warnings.
+
+  7a9a39f  Deps: bump floors to Boost 1.85 and MariaDB 10.6.3
+           dep/boost/CMakeLists.txt:
+             BOOST_REQUIRED_VERSION 1.78/1.74 -> 1.85 on both Windows and Linux.
+           cmake/macros/FindMySQL.cmake:
+             + Added Windows registry hints for MariaDB 10.6 and 10.11.
+             + Added MariaDB Program Files glob alongside MySQL's.
+             + Added a real version probe that reads mysql_config --version,
+               falls back to parsing mysql_version.h, and emits a WARNING (not
+               a hard error) if the detected MariaDB is older than 10.6.3.
+               MySQL 8.x users are deliberately skipped — only the MariaDB
+               family is enforced. Verified live: detected MariaDB 11.8.6 and
+               correctly stayed silent because >= 10.6.3.
+
+  355ce8e  Build: add compile_deps/ for vendored / one-click third-party setup
+           NEW top-level folder compile_deps/ providing a zero-config build
+           experience. After a one-time `compile_deps/setup_deps.{ps1,sh}`
+           the project builds with no env-vars set.
+             * compile_deps/README.md, DEPENDENCIES.md       (manifest + docs)
+             * compile_deps/setup_deps.ps1, setup_deps.sh    (downloads + SHA-256 verify)
+             * compile_deps/cmake/LegionCoreDeps.cmake       (auto-set BOOST_ROOT,
+                                                              MYSQL_ROOT_DIR,
+                                                              OPENSSL_ROOT_DIR)
+             * compile_deps/mariadb/source/                  (Connector/C 3.4.8 source,
+                                                              6.1 MB, vendored verbatim,
+                                                              SHA matches archive.mariadb.org)
+             * compile_deps/.gitignore                       (keeps fetched binaries out
+                                                              of git; only the small
+                                                              vendored zip is tracked)
+           CMakeLists.txt: includes the new helper immediately after project().
+           cmake/macros/FindMySQL.cmake: searches MYSQL_ROOT_DIR with NO_DEFAULT_PATH
+             FIRST so the vendored Connector/C wins over system /usr/lib/libmariadb.
+           BUILD_WINDOWS.md: new TL;DR section showing the zero-config flow.
+           Verified end-to-end on Linux: cold-cache configure (incl. vendored
+           Connector/C compile) = 14.7 s; MYSQL_LIBRARY / MYSQL_INCLUDE_DIR /
+           MYSQL_ROOT_DIR all resolve inside the vendored install tree.
+
+  11b1f97  Windows: modernize toolchain to VS 2022 + Win10, add presets + guide
+           cmake/compiler/msvc/settings.cmake:
+             - MSVC floor 19.10 (VS 2017) -> 19.30 (VS 2022 v143 toolset).
+               Required because the codebase already uses C++20 (cxx_std_20),
+               which VS 2017 cannot deliver.
+             - Added the C++20 hygiene flags the project was missing:
+                 /Zc:__cplusplus   correct __cplusplus value
+                 /Zc:preprocessor  C99/C++20-conforming preprocessor
+                 /utf-8            source AND exec charset = UTF-8
+                 /EHsc             standard C++ exception model
+                 /permissive-      strict ISO conformance
+           cmake/platform/win/settings.cmake:
+             - _WIN32_WINNT 0x0601 (Win 7, EOL) -> 0x0A00 (Win 10/Server 2016+)
+               (Boost 1.85, OpenSSL 3, and the modern MSVC runtime no longer
+               support Windows 7.)
+             - Set matching WINVER=0x0A00, NTDDI_VERSION=NTDDI_WIN10_RS5 (1809).
+             - Pre-defined _WINSOCK_DEPRECATED_NO_WARNINGS.
+           CMakePresets.json (NEW):
+             - windows-msvc-release / windows-msvc-debug
+               (Visual Studio 17 2022, x64, TOOLS=1, paths to Boost/MariaDB/
+               OpenSSL pre-wired)
+             - linux-gcc-release (Ninja)
+             - Windows presets carry hostSystemName=Windows conditions so
+               they're auto-hidden on non-Windows hosts.
+           BUILD_WINDOWS.md (NEW):
+             - Required versions table, install URLs, exact env-var setup
+             - Both preset-based and classic configure flows
+             - 7 Windows-specific troubleshooting entries
+             - Accurate output binary list (bnetserver.exe — NOT authserver;
+               Legion uses Battle.net auth)
+
+--------------------------------------------------------------------------------
+  5. THE 64 REFORGED COMMITS MERGED IN (oldest -> newest)
+--------------------------------------------------------------------------------
+
+  bf8c7e7  Scripts/Blackwing Lair : Fix memory leak on Nefarian
+  c279a9c  Scripts/BrawlersGuild : Fix potential null-pointer crashes in Ranks 2, 3, 5 and 6
+  8194f7a  Delete old sql
+  7fbda08  DB/BrawlersGuild : Add missing ScriptNames and enable Queue systems
+  6cf12bf  Scripts/Antorus : Fix compilation warnings for frand() literals
+  2f731f1  Scripts/CathedralEternalNight : Cleanup math literals and C-style casts
+  ae31d15  Scripts/Highmaul : Fix floating-point precision and type safety
+  e9f8c6e  Scripts/Global : Finalize "Zero Warning Build"
+  fdad576  Core/Scripts : Resolve type truncation and signed mismatch warnings
+  fadb7bb  Core/Scripts : Warning Build (90% complete)
+  b2a857c  Core/Scripts : Warning Build (100% complete)
+  dfcfaba  Core/Game : Standardize combat and movement function type safety
+  fc3628a  Game/Protocol : Avoid noisy error logs
+  279fe8f  Game/Entitites : Damage variance system (from 9.x)
+  797edb8  Game/Protocol : Add Handle_NoOp to WorldSession
+  3208582  Game/Handlers : Enable bag/bank sorting + fix
+  2ab305f  Core/Map : use unordered containers and optimize pulls
+  aeebd56  SQL/DB : DBErrors fix SQL
+  e34c064  Core/Handlers : Fix Adventure Journal
+  bb96425  Fix Legion Assault bonus objectives visibility
+  4fef14e  Core/Commands : Command Legion Assault (Broken Isle)
+  c02d02b  Server/Scripts : Demon Invasion PrePatch initial
+  ae354f7  Core/Spells : Fix damage variance system for periodic damage
+  6e8d923  Core/Scripts: GM fly persistence, Rukhmar repath, Skyreach beam, Demon Invasion phase 4, waypoint & NPC fixes
+  ef8f15a  Scripts/Commands : custom .gps commands
+  cb1b2d2  Scripts/SpiresofArak : More fixes for sky beam
+  8404d0c  Scripts/SpiresofArak: Skybeam two-beam architecture + activation sound
+  7f790b9  Revert "Delete old sql"
+  2793e54  Scripts/SpiresofArak: Skybeam channel beam + fire improvements
+  4bf3f4e  Scripts/Commands : Default GPS command handler
+  c6489d8  Core/DataStores : Enable spell visual DB2s
+  1b16dbe  Tools : Pause on exit and print input path in extractors
+  fe55fc7  Remove those shitty SoloCraft scripts and Trinity strings 💩
+  11d5fc6  Update PathGenerator.cpp
+  3cf0d5c  Tools/Patcher : GlueXML protection
+  b68d73e  Tools/Patcher : Patching accountList CVar
+  ae3f4dc  cleanup db
+  61bcf0e  big cleanup db
+  ba1c434  Core/Characters : Deleted Character Restoration System
+  1204fef  Core/BattlePay : Fix
+  dcd9f9f  Update Windows.hpp
+  58616fa  Tools : update
+  7ab6511  Core/BattlePay : Class Trial Implementation
+  2f99d42  Tools fix
+  2216c03  Tools : Multicores support
+  08f8f3c  Tools : fix
+  22dc652  SQL : Boost Experience Gunship
+  49990fa  Tools : fix
+  7d97836  Scripts/Commands : "Go To" command
+  666b676  Scripts/SpiresofArak : Solar Skyreach Laser Event (WIP)
+  97ba92b  SQL/Creature : Traduction Française
+  ee86033  Core/Packets : WoW Token Implementation
+  a998518  Update
+  e37f044  Core/BattlePay : Update
+  45c9418  Core/BattlePay : Currency test (€)
+  8e5709d  Core/Achievement : Fix
+  23075ed  Disable WoW Token
+  75a64f4  Core/BattlePay : more scripts for character boost 90
+  0e51375  SQL/Quest : disable iron horde invasion quests (6.0.2)
+  ce3d124  Scripts/Warlock : fix pet
+  96d7f89  Fix Iron Demolisher
+  b4be06d  Miscellaneous corrections
+  814091a  Core/Collision : Improvement
+  a6476a4  Sql : more fixes
+
+  Broad categories (full diffstat: 308 files, +129,262 / -3,993 lines):
+
+    * Core/BattlePay      WoW Token packets, character boost 90,
+                          Class Trial, currency (€), various fixes
+    * Core/Characters     Deleted Character Restoration System
+    * Game/Protocol       NoOp handler, noise-suppression in error logs
+    * Game/Entities       Damage variance system (backported from 9.x)
+    * Game/Handlers       Bag/bank sort + Adventure Journal fix
+    * Core/Map            unordered containers, optimized pulls
+    * Core/Spells         Periodic-damage variance fix
+    * Core/Scripts        GM fly persistence, dynamic linking groundwork
+    * Tools               Multicore extractors, GlueXML patcher,
+                          accountList CVar patcher, various fixes
+    * Scripts/SpiresofArak    Skybeam two-beam architecture + activation
+    * Scripts/BrawlersGuild   Null-pointer crash fixes + queue enable
+    * Scripts/Highmaul        Iron Demolisher fix, FP precision cleanup
+    * Scripts/Antorus         frand() literal warnings cleaned
+    * Scripts/CathedralEternalNight  C-style cast cleanup
+    * Scripts/BlackwingLair   Memory leak fix on Nefarian
+    * Scripts/Warlock         Pet bug fix
+    * Scripts/Legion          Demon Invasion Pre-Patch (phases 1-4),
+                              Legion Assault command, bonus-objective
+                              visibility fix
+    * SQL                 Major cleanup (big cleanup db, cleanup db),
+                          French creature translations, demon invasion
+                          spawns (azshara, barrens, dunmorogh,
+                          hillsbrad, tanaris, westfall), bonus
+                          experience gunship, etc.
+    * Removals            old SoloCraft scripts and stale TC strings
+
+--------------------------------------------------------------------------------
+  6. BUILD REQUIREMENT FLOORS (post-modernization)
+--------------------------------------------------------------------------------
+
+  Component       Minimum         Verified against
+  --------------- --------------  -----------------------------------
+  CMake           3.18            tested with 4.3.2 (Kitware official binary)
+  C++ standard    C++20           cxx_std_20 (cmake/macros/ConfigureBaseTargets.cmake:22)
+  Boost           1.85            tested with 1.88.0 (system package)
+  OpenSSL         1.0 (1.1+ rec)  tested with 3.5.5
+  MariaDB         10.6.3 (LTS)    tested with 11.8.6 (warning fires below 10.6.3)
+  MSVC            19.30 (VS 2022) Windows only
+  Windows         10 build 17763  Windows only
+  GCC             >= 8 (C++20)    Linux
+  Clang           >= 7 (C++20)    Linux
+
+--------------------------------------------------------------------------------
+  7. CONFIRMED BUILD-INSTRUCTION ACCURACY (BUILD_WINDOWS.md)
+--------------------------------------------------------------------------------
+
+Every concrete claim in BUILD_WINDOWS.md was cross-checked against the actual
+CMake code in this commit and the on-disk file list:
+
+  [✓] "cmake_minimum_required is 3.18...4.3.2"   -> CMakeLists.txt:11
+  [✓] "MSVC floor is 19.30"                      -> cmake/compiler/msvc/settings.cmake:1
+  [✓] "_WIN32_WINNT bumped to 0x0A00"            -> cmake/platform/win/settings.cmake:4
+  [✓] "Boost floor 1.85 on both Win and Linux"   -> dep/boost/CMakeLists.txt:51-55
+  [✓] "MariaDB floor 10.6.3 (warning)"           -> cmake/macros/FindMySQL.cmake (new block)
+  [✓] "Preset 'windows-msvc-release' exists"     -> CMakePresets.json (validated by python -m json.tool)
+  [✓] "TOOLS=1 enables map/vmap/mmap extractors" -> cmake/options.cmake:40
+  [✓] "SCRIPTS=static is valid"                  -> cmake/options.cmake:14
+  [✓] Output binaries list:                      -> grep "^add_executable" src/...
+        bnetserver, worldserver, mapextractor, vmap4extractor,
+        vmap4assembler, mmaps_generator, connection_patcher
+      (Originally said "authserver.exe" — CORRECTED to "bnetserver.exe"
+      since Legion uses Battle.net auth, not the WoW logon protocol.)
+
+--------------------------------------------------------------------------------
+  8. END-TO-END BUILD-SYSTEM VERIFICATION
+--------------------------------------------------------------------------------
+
+A full CMake configure was run from scratch on the final tree using the
+upstream Kitware CMake 4.3.2 Linux x86_64 binary, against system-installed
+Boost 1.88, OpenSSL 3.5.5, MariaDB 11.8.6, zlib 1.3.1, readline 8.2, GCC
+14.2.0. Result:
+
+    cmake version 4.3.2
+    -- Detected 64-bit platform
+    -- UNIX: Detected compiler: /usr/bin/cc
+    -- Detected MySQL/MariaDB client version: 11.8.6   (>= 10.6.3, OK)
+    -- Found Boost 1.88.0                              (>= 1.85, OK)
+    -- Found OpenSSL 3.5.5
+    -- Found Git 2.47.3
+    -- Configuring done (1.3s)
+    -- Generating done (0.4s)
+    -- Build files have been written to: /tmp/legioncore-final
+    (zero policy warnings, zero deprecations, zero errors)
+
+All 17 worldserver script subdirectories registered correctly:
+  BattlePay, BrawlersGuild, Commands, Custom, Draenor, EasternKingdoms,
+  Kalimdor, Legion, Maelstrom, Northrend, OutdoorPvP, Outland, Pandaria,
+  Scenario, Spells, World, plus worldserver itself.
+
+NOTE: A full "cmake --build ." (~3,000 translation units) was NOT executed
+in this sandbox. The configure layer is proven; the actual compiler-vs-code
+relationship for Reforged's new sources has not been independently verified
+by this work. Reforged itself includes commits "Core/Scripts: Warning Build
+(100% complete)" and "Scripts/Global: Finalize Zero Warning Build", which
+strongly suggests a clean -Wall build, but this should be validated on a
+real Windows + VS 2022 machine before production deployment.
+
+--------------------------------------------------------------------------------
+  9. BRANCH STATE AT GENERATION TIME
+--------------------------------------------------------------------------------
+
+  * merged-reforged   <new-head>  CHANGELOG.txt added
+    11b1f97           Windows: modernize toolchain to VS 2022 + Win10, add presets and build guide
+    7a9a39f           Deps: bump floors to Boost 1.85 and MariaDB 10.6.3
+    e099f66           CMake: support up to CMake 4.3.2
+    13dde92           Merge LegionCore-Reforged into LegionCore-7.3.5
+    a6476a4 ... bf8c7e7   (64 Reforged commits)
+    fed58f7 ... cbf4f25   (283 original LegionCore-7.3.5 commits)
+
+    main              fed58f7 Update IntermediateValues.cpp (#252)
+                      (untouched — safe rollback point)
+
+--------------------------------------------------------------------------------
+ 10. POST-DELIVERY ADDITIONS
+--------------------------------------------------------------------------------
+
+  e99419e  Scripts/Custom: restore SoloCraft + fix missing <unordered_set>
+           Reforged commit fe55fc7 ("Remove those shitty SoloCraft scripts...")
+           had deleted src/server/scripts/Custom/ in its entirety. Restored
+           the directory verbatim from the upstream source at
+           github.com/Psychostout/LegionCore-7.3.5/tree/main/src/server/scripts/Custom:
+             * Solocraft.cpp                    (40,790 B, byte-exact)
+             * custom_script_loader.cpp            (158 B, byte-exact)
+
+           No build-system changes were needed: CMake's GetScriptModuleList()
+           does a file(GLOB) over src/server/scripts/* and the
+           ScriptLoader.cpp.in.cmake template auto-generates the
+           AddCustomScripts() forward-decl + invocation by convention.
+
+           Verified end-to-end on Linux with the project's own compile flags:
+             - Generated ScriptLoader.cpp contains both:
+                   void AddCustomScripts();   AddCustomScripts();
+             - Generated Makefile schedules both .cpp files into libscripts.a
+             - Real compile of Solocraft.cpp produced /tmp/solocraft.o
+                   exit: 0    errors: 0    warnings: 22 (pre-existing)
+             - Symbol table proves linkage:
+                   solocraft.o: AddSC_solocraft = T (defined)
+                   csl.o:       AddSC_solocraft = U (undefined ref, resolved at link)
+
+           SoloCraft is shipped DISABLED — Solocraft.Enable defaults to 0
+           in worldserver.conf.dist (and in the source defaults), so the
+           server starts identically to before. Admins opt in by setting
+           Solocraft.Enable = 1 and tuning the 244 documented config keys.
+
+           Also fixed pre-existing header hygiene bug in
+           src/server/game/DataStores/DB2Stores.h: added
+             #include <unordered_set>
+             #include <vector>
+           because the header uses std::unordered_set<uint32> and std::vector
+           but was relying on transitive includes that don't exist in all
+           translation units. This bug is normally hidden by the PCH but
+           bites any TU that pulls DB2Stores.h through a non-PCH path —
+           which is what restoring SoloCraft exposed.
+
+           Also added: src/server/worldserver/worldserver.conf.dist now has
+           a documented SoloCraft configuration block (master switch +
+           pointers to the per-class / per-instance multipliers).
+
+--------------------------------------------------------------------------------
+ 11. POST-DELIVERY ADDITIONS — Build, Docs, Translation
+--------------------------------------------------------------------------------
+
+  ac010fc  Build+Docs: OpenSSL 3.5 LTS, Boost.Process v1 compat, English config, README, proto cleanup
+
+    compile_deps/setup_deps.{ps1,sh}
+      * Bumped OpenSSL pin from 3.3.2 -> 3.5.0 LTS (current Long-Term-Support
+        series, supported through April 2030 by the OpenSSL Foundation).
+      * Linux: prefer the cmake-friendly modular Boost archive (90 MB
+        boost-1.85.0-cmake.tar.xz) over the legacy tarball; --legacy-boost
+        flag falls back to the bootstrap.sh + b2 flow.
+      * Linux: OpenSSL built with no-tests no-docs no-shared (faster, smaller).
+      * Windows: probe-and-fallback to source build if the SLProWeb prebuilt
+        installer is unavailable.
+
+    compile_deps/DEPENDENCIES.md
+      * Updated table with computed-and-verified SHA-256s:
+          boost-1.85.0-cmake.tar.xz =
+            0a9cc56ceae46986f5f4d43fe0311d90cf6d2fa9028258a95cab49ffdacf92ad
+          openssl-3.5.0.tar.gz =
+            344d0a79f1a9b08029b0744e2cc401a43f9c90acd1044d09a530b4885a8e9fc0
+            (matches openssl.org's published value)
+      * Documented that OpenSSL 3.5 drops 1.1.x support.
+
+    src/common/Utilities/StartProcess.cpp
+      * Handle Boost.Process header move in Boost 1.86+
+        (boost/process/*.hpp -> boost/process/v1/*.hpp). Added
+        BOOST_VERSION >= 108600 probe with #if/#else branches and a
+        `using namespace boost::process::v1` re-export so the rest of
+        the file is unchanged.
+      * Verified by real compile against Boost 1.88: 498 KB .o produced,
+        exit 0, 0 errors.
+
+    src/server/worldserver/worldserver.conf.dist
+      * Translated French -> English on comment lines only, leaving all
+        474 setting lines byte-identical to the French original (verified
+        by diff). The Reforged upstream shipped a French-localised config;
+        this branch ships an English one.
+      * 100% English: zero French markers (defaut/fichier/repertoire/
+        royaume/connexion/deconnexion/parametre/disponible/etc.) detected.
+      * Translation produced by a comment-only re-pass with word-boundary
+        regex (safe — cannot corrupt setting names like Game.Build.Version).
+      * Spot-corrected 4 lines that resisted automatic translation.
+      * Reads as functional English; may be more mechanical than a human
+        translation in places. See _translation_workspace/README.md for
+        the option to swap in a Google-translated version.
+
+    src/server/proto/PrecompiledHeaders/protoPCH.h
+      * Trimmed down to only the .pb.h files that actually exist in the
+        tree. The upstream Reforged fork is missing 13 BNet service
+        descriptors (account_service, authentication_service,
+        challenge_service, channel_service, connection_service,
+        friends_service, game_utilities_service, notification_types,
+        presence_service, profanity_filter_config, report_service,
+        resource_service, user_manager_service). Their absence was
+        previously masked by the PCH but breaks any non-PCH translation
+        unit.
+
+    src/server/proto/CMakeLists.txt
+      * Exclude the broken Client/ subdirectory from CollectSourceFiles
+        since its .pb.cc files include the missing rpc_types.pb.h etc.
+      * Documented as a known pre-existing limitation; bnetserver and
+        game/Services classes that need the full BNet descriptor set
+        still need those regenerated specifically for Legion 7.3.5
+        before bnetserver can fully link.
+
+    README.md (NEW)
+      * Quick-start sections for Linux and Windows.
+      * Requirements table (CMake, GCC, MSVC, Boost, OpenSSL, MariaDB).
+      * Honest "what builds / what doesn't" Build Status section.
+      * Documented "Known pre-existing limitation (BNet protos)" with
+        exact file references and the proposed fix path.
+      * Full repository layout with per-folder descriptions.
+      * Configuration snippet showing the database connection strings,
+        port, DataDir, and Solocraft.Enable.
+      * Contributing notes and license info (GPL-2.0-or-later +
+        LGPL-2.1 for vendored MariaDB).
+
+    Verified compile chain on Linux/Debian13/GCC14.2.0:
+      ✓ libcommon.a   (3.6 MB)
+      ✓ libdatabase.a (4.3 MB)
+      ✓ libproto.a    (272 KB — Login + RealmList descriptors only)
+      ✓ libmariadbclient.a (711 KB — vendored Connector/C 3.4.8)
+      ✓ libprotobuf.a, libfmt.a, libg3dlib.a, libDetour.a, libsfmt.a, libzlib.a
+      ✗ libshared.a (blocked on missing game_utilities_service.pb.h)
+
+--------------------------------------------------------------------------------
+ 12. POST-DELIVERY ADDITIONS — Proto investigation + revert
+--------------------------------------------------------------------------------
+
+  214c1d7  Snapshot at start of verification turn (all prior work intact +
+           64 TC-master proto files in src/server/proto/Client/)
+
+           Attempted to backport the missing BNet descriptors by downloading
+           them from upstream TrinityCore master. 64 .pb.{h,cc} files
+           fetched into src/server/proto/Client/ + 8 into
+           src/server/proto/Client/global_extensions/.
+
+  56630cd  Revert: remove TC-master proto/Client backport (ABI incompatible)
+
+           Compiling against the backported files revealed that TC master
+           has restructured the proto tree into api/{client,common}/v1/
+           subdirectories (hundreds of files), and the descriptor schemas
+           have evolved enough — TC master targets Dragonflight (11.x) —
+           that they are NOT ABI-compatible with what Legion 7.3.5 expects.
+
+           First transitive include failure on
+              src/server/proto/Client/friends_types.pb.h:30:
+              fatal error: api/common/v1/invitation_types.pb.h: No such file
+           confirmed the structural divergence.
+
+           Reverted cleanly: restored conservative proto/CMakeLists.txt
+           (exclude Client/), trimmed protoPCH.h. The proto/common/
+           database libraries continue to build cleanly under this
+           configuration. shared/bnetserver/worldserver still need
+           PERIOD-CORRECT BNet descriptors regenerated for Legion 7.3.5,
+           which is outside the scope of this branch.
+
+           The libproto.a we ship contains Login + RealmList only, which
+           is what's actually present and complete in the upstream
+           Reforged source — same as before this turn.
+
+--------------------------------------------------------------------------------
+ 13. CURRENT BUILD STATUS (end of turn)
+--------------------------------------------------------------------------------
+
+  CMake configure with CMake 4.3.2:
+    Configuring done (14.9s), Generating done (0.4s)
+    Zero policy warnings, zero deprecation warnings, zero errors.
+    All 17 script subdirectories registered (BattlePay, BrawlersGuild,
+    Commands, Custom*, Draenor, EasternKingdoms, Kalimdor, Legion,
+    Maelstrom, Northrend, OutdoorPvP, Outland, Pandaria, Scenario,
+    Spells, World + worldserver itself).
+       * = SoloCraft restored
+
+  Targets that compile cleanly (Linux/GCC 14.2.0/Boost 1.88/OpenSSL 3.5.5/
+                                MariaDB 11.8.6):
+    [✓] All vendored deps (dep/*)
+        - protobuf, fmt, g3dlib, Detour, sfmt, zlib, gsoap, CascLib,
+          recastnavigation, SFMT, utf8cpp, openssl wrapper, threads
+    [✓] Vendored MariaDB Connector/C 3.4.8 (from compile_deps/mariadb/source/)
+    [✓] common      (libcommon.a   3.6 MB)
+    [✓] database    (libdatabase.a 4.3 MB)
+    [✓] proto       (libproto.a    272 KB — Login + RealmList descriptors)
+
+  Targets blocked on the missing BNet protos:
+    [✗] shared      (RealmList.cpp #includes game_utilities_service.pb.h)
+    [✗] scripts     (transitive — depends on shared)
+    [✗] bnetserver  (transitive)
+    [✗] worldserver (transitive)
+
+  Reason: 13 BNet service .pb.{h,cc} files missing from upstream Reforged.
+  TC master's versions are Dragonflight-era and not ABI-compatible.
+  Resolution requires obtaining Legion-7.3.5-period .proto sources and
+  generating with the bundled protobuf — outside this branch's scope.
+
+--------------------------------------------------------------------------------
+ 14. FILE INVENTORY (end of turn)
+--------------------------------------------------------------------------------
+
+  Total tracked files:        3,772
+  Total files in working tree: 3,716
+  src/ files:                  2,358
+  sql/ files:                    190
+  compile_deps/ files:           488 (incl. 477 vendored MariaDB source)
+  CMakeLists.txt files:           40
+  .cmake files:                   27
+
+  Modernization files added/modified (25 files, all verified present):
+    CHANGELOG.txt                                         (documents merge)
+    README.md                                             (NEW)
+    BUILD_WINDOWS.md                                      (NEW)
+    CMakePresets.json                                     (NEW)
+    CMakeLists.txt                                        (modified)
+    cmake/macros/FindMySQL.cmake                          (modified)
+    cmake/compiler/msvc/settings.cmake                    (modified)
+    cmake/platform/win/settings.cmake                     (modified)
+    dep/boost/CMakeLists.txt                              (modified)
+    compile_deps/README.md                                (NEW)
+    compile_deps/DEPENDENCIES.md                          (NEW)
+    compile_deps/setup_deps.ps1                           (NEW)
+    compile_deps/setup_deps.sh                            (NEW)
+    compile_deps/cmake/LegionCoreDeps.cmake               (NEW)
+    compile_deps/.gitignore                               (NEW)
+    compile_deps/downloads/mariadb-connector-c-3.4.8-src.zip (NEW, vendored)
+    compile_deps/downloads/mariadb-sha256sums.txt         (NEW, checksum proof)
+    compile_deps/mariadb/source/* (470 files)             (NEW, vendored 3.4.8)
+    src/common/Utilities/StartProcess.cpp                 (modified — Boost 1.86+)
+    src/server/game/DataStores/DB2Stores.h                (modified — +#include)
+    src/server/proto/CMakeLists.txt                       (modified — exclude Client/)
+    src/server/proto/PrecompiledHeaders/protoPCH.h        (modified — trim)
+    src/server/scripts/Custom/Solocraft.cpp               (RESTORED)
+    src/server/scripts/Custom/custom_script_loader.cpp    (RESTORED)
+    src/server/worldserver/worldserver.conf.dist          (TRANSLATED to English)
+    _translation_workspace/                               (NEW — for opt-in re-translation)
+
+================================================================================
+  End of changelog
+================================================================================
